@@ -17,10 +17,10 @@ const App: React.FC = () => {
               <Link to="/">Grand Central</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about-others">About Others</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link to="/another-app">Another App</Link>
             </li>
           </ul>
         </nav>
@@ -28,14 +28,14 @@ const App: React.FC = () => {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
-            <About />
+          <Route path="/about-others">
+            <AboutOthers />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/another-app">
+            <AnotherApp />
           </Route>
           <Route path="/">
-            <Home />
+            <GrandCentral />
           </Route>
         </Switch>
       </div>
@@ -43,16 +43,16 @@ const App: React.FC = () => {
   );
 }
 
-function Home() {
+function GrandCentral() {
   return <h2>Grand Central</h2>;
 }
 
-function About() {
+function AboutOthers() {
   return <h2>About</h2>;
 }
 
-function Users() {
-  return <h2>Users</h2>;
+function AnotherApp() {
+  return <h2>Another App</h2>;
 }
 
 export default App;
