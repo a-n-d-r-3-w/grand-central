@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import AboutOthers from './AboutOthers';
 import './App.css';
 
 const App: React.FC = () => {
@@ -47,10 +48,6 @@ const App: React.FC = () => {
 
 function GrandCentral() {
   return <h2>Grand Central</h2>;
-}
-
-function AboutOthers() {
-  return <h2>About</h2>;
 }
 
 function AnotherApp() {
