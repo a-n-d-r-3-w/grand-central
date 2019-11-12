@@ -5,37 +5,42 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
 import './App.css';
 
 const App: React.FC = () => {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Grand Central</Link>
-            </li>
-            <li>
-              <Link to="/about-others">About Others</Link>
-            </li>
-            <li>
-              <Link to="/another-app">Another App</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route path="/about-others">
-            <AboutOthers />
-          </Route>
-          <Route path="/another-app">
-            <AnotherApp />
-          </Route>
-          <Route path="/">
-            <GrandCentral />
-          </Route>
-        </Switch>
-      </div>
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Grand Central</Link>
+              </li>
+              <li>
+                <Link to="/about-others">About Others</Link>
+              </li>
+              <li>
+                <Link to="/another-app">Another App</Link>
+              </li>
+            </ul>
+          </nav>
+          <Switch>
+            <Route path="/about-others">
+              <AboutOthers />
+            </Route>
+            <Route path="/another-app">
+              <AnotherApp />
+            </Route>
+            <Route path="/">
+              <GrandCentral />
+            </Route>
+          </Switch>
+        </div>
+      </Container>
     </Router>
   );
 }
