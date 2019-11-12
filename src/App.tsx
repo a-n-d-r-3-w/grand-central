@@ -47,11 +47,11 @@ const App: React.FC = () => {
 }
 
 function GrandCentral() {
-  return <h2>Grand Central</h2>;
+  return <h1>Grand Central</h1>;
 }
 
 function AnotherApp() {
-  return <h2>Another App</h2>;
+  return <h1>Another App</h1>;
 }
 
 export default App;
