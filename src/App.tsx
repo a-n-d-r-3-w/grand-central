@@ -14,7 +14,7 @@ const App: React.FC = () => {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Grand Central</Link>
             </li>
             <li>
               <Link to="/about">About</Link>
@@ -44,7 +44,7 @@ const App: React.FC = () => {
 }
 
 function Home() {
-  return <h2>Home</h2>;
+  return <h2>Grand Central</h2>;
 }
 
 function About() {
