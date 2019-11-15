@@ -5,7 +5,10 @@ import {connect} from 'react-redux';
 import {createAccount} from './aboutOthersActions';
 import {Account} from './type';
 
-function AboutOthers(props: { accounts: Array<Account>, createAccount: (accountId: string) => {} }) {
+function AboutOthers(props: {
+  accounts: Array<Account>,
+  createAccount: (accountId: string) => {}
+}) {
   const handleClickCreateAccount = () => {
     const accountId = shortid.generate();
     props.createAccount(accountId);
@@ -26,7 +29,11 @@ AboutOthers.defaultProps = {
   accounts: []
 };
 
-const mapStateToProps = (state: { aboutOthersReducer: { accounts: Array<Account> } }) => ({
+const mapStateToProps = (state: {
+  aboutOthersReducer: {
+    accounts: Array<Account>
+  }
+}) => ({
   accounts: state.aboutOthersReducer.accounts
 });
 
