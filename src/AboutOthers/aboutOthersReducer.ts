@@ -1,17 +1,5 @@
-import {CREATE_ACCOUNT} from './actions';
-
-type Person = {
-  personId: string
-};
-
-type Account = {
-  accountId: string,
-  people: Array<Person>
-};
-
-type State = {
-  accounts: Array<Account>
-}
+import {CREATE_ACCOUNT} from './aboutOthersActions';
+import {Account, State} from './type';
 
 const initialState: State = {
   accounts: []
