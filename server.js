@@ -11,7 +11,7 @@ app.use(express.static('build'));
 app.post('/api/accounts', async (req, res) => {
   const accountId = shortid.generate();
   const result = await connectRunClose('accounts', async accounts => {
-    return await accounts.insertOne({accountId, people: []});
+    return accounts.insertOne({accountId, people: []});
   });
   return res.json({
     accountId: result.ops[0].accountId,

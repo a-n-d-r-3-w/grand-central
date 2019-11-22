@@ -5,7 +5,7 @@ const DB_URL = 'mongodb://localhost:27017';
 const DB_NAME = 'aboutothers';
 
 module.exports = async (collectionName, fn) => {
-  const client = new MongoClient(DB_URL);
+  const client = new MongoClient(DB_URL, { useUnifiedTopology: true });
   try {
     await client.connect();
     const db = client.db(DB_NAME);
