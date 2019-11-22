@@ -2,12 +2,8 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import {connect} from 'react-redux';
 import {createAccount} from './aboutOthersActions';
-import {Account} from './type';
 
-function AboutOthers(props: {
-  accounts: Array<Account>,
-  createAccount: () => {}
-}) {
+function AboutOthers(props) {
   const handleClickCreateAccount = () => {
     props.createAccount();
   };
@@ -18,7 +14,7 @@ function AboutOthers(props: {
       <Button variant="contained" color="primary" onClick={handleClickCreateAccount}>
         Create account
       </Button>
-      {props.accounts.map((account: Account) => (<div>{account.accountId}</div>))}
+      {props.accounts.map(account => (<div>{account.accountId}</div>))}
     </>
   );
 }
@@ -27,11 +23,7 @@ AboutOthers.defaultProps = {
   accounts: []
 };
 
-const mapStateToProps = (state: {
-  aboutOthersReducer: {
-    accounts: Array<Account>
-  }
-}) => ({
+const mapStateToProps = state => ({
   accounts: state.aboutOthersReducer.accounts
 });
 

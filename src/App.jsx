@@ -7,10 +7,10 @@ import {
 } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import AboutOthers from './AboutOthers';
+import AboutOthers from './AboutOthers/index';
 import './App.css';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <Router>
       <CssBaseline />
