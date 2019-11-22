@@ -11,8 +11,6 @@ module.exports = async (collectionName, fn) => {
     const db = client.db(DB_NAME);
     const collection = db.collection(collectionName);
     return await fn(collection);
-  } catch (err) {
-    console.error(err);
   } finally {
     await client.close();
   }

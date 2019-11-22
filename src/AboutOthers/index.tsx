@@ -1,17 +1,15 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import shortid from 'shortid';
 import {connect} from 'react-redux';
 import {createAccount} from './aboutOthersActions';
 import {Account} from './type';
 
 function AboutOthers(props: {
   accounts: Array<Account>,
-  createAccount: (accountId: string) => {}
+  createAccount: () => {}
 }) {
   const handleClickCreateAccount = () => {
-    const accountId = shortid.generate();
-    props.createAccount(accountId);
+    props.createAccount();
   };
 
   return (

@@ -1,8 +1,7 @@
 export const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
 
-export const createAccount = (accountId: string) => {
+export const createAccount = () => {
   return ({
-    type: CREATE_ACCOUNT,
-    accountId
+    type: CREATE_ACCOUNT
   });
 };
