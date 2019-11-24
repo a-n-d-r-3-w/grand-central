@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const connectRunClose = require('./connectRunClose');
 const shortid = require('shortid');
+const HttpStatus = require('http-status-codes');
 
 const app = express();
 const port = 3000;
@@ -13,10 +14,21 @@ app.post('/api/accounts', async (req, res) => {
   const result = await connectRunClose('accounts', async accounts => {
     return accounts.insertOne({accountId, people: []});
   });
-  return res.json({
-    accountId: result.ops[0].accountId,
-    people: result.ops[0].people
-  });
+  if (result.result.ok === 1) {
+    res.status(HttpStatus.CREATED).json({ accountId });
+    return;
+  }
+  res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+});
+
+app.get('/api/accounts/:accountId', async (req, res) => {
+  const { accountId } = req.params;
+  const account = await connectRunClose('accounts', accounts => accounts.findOne({ accountId }))
+  if (account === null) {
+    res.sendStatus(HttpStatus.NOT_FOUND);
+    return;
+  }
+  res.status(HttpStatus.OK).json(account);
 });
 
 app.get('/*', (req, res) => {
