@@ -66,6 +66,30 @@ app.post('/api/accounts/:accountId/people', async (req, res) => {
   res.send(HttpStatus.CREATED, person);
 });
 
+app.get('/api/accounts/:accountId/people', async (req, res) => {
+  const { accountId } = req.params;
+  const account = await connectRunClose('accounts', accounts =>
+    accounts.findOne({ accountId })
+  );
+  if (account === null) {
+    res.send(HttpStatus.NOT_FOUND);
+    return;
+  }
+  const { people } = account;
+  people.sort((person1, person2) => {
+    const name1 = person1.name.toLowerCase();
+    const name2 = person2.name.toLowerCase();
+    if (name1 < name2) {
+      return -1;
+    }
+    if (name1 > name2) {
+      return 1;
+    }
+    return 0;
+  });
+  res.send(HttpStatus.OK, people);
+});
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
