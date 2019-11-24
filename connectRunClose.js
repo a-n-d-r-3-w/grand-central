@@ -1,4 +1,4 @@
-const {MongoClient} = require('mongodb');
+const { MongoClient } = require('mongodb');
 
 const DB_URL = 'mongodb://localhost:27017';
 // const DB_URL = process.env.DB_URL

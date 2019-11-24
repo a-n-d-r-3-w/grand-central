@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import AboutOthers from './AboutOthers/index';
@@ -44,7 +39,7 @@ const App = () => {
       </Container>
     </Router>
   );
-}
+};
 
 function GrandCentral() {
   return <h1>Grand Central</h1>;

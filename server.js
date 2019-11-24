@@ -15,7 +15,7 @@ app.use(express.static('build'));
 app.post('/api/accounts', async (req, res) => {
   const accountId = shortid.generate();
   const result = await connectRunClose('accounts', async accounts => {
-    return accounts.insertOne({accountId, people: []});
+    return accounts.insertOne({ accountId, people: [] });
   });
   if (result.result.ok === 1) {
     res.status(HttpStatus.CREATED).json({ accountId });
@@ -26,7 +26,9 @@ app.post('/api/accounts', async (req, res) => {
 
 app.get('/api/accounts/:accountId', async (req, res) => {
   const { accountId } = req.params;
-  const account = await connectRunClose('accounts', accounts => accounts.findOne({ accountId }))
+  const account = await connectRunClose('accounts', accounts =>
+    accounts.findOne({ accountId })
+  );
   if (account === null) {
     res.sendStatus(HttpStatus.NOT_FOUND);
     return;
@@ -47,7 +49,9 @@ app.post('/api/accounts/:accountId/people', async (req, res) => {
   }
 
   const { accountId } = req.params;
-  const account = await connectRunClose('accounts', accounts => accounts.findOne({ accountId }));
+  const account = await connectRunClose('accounts', accounts =>
+    accounts.findOne({ accountId })
+  );
   const { people } = account;
   const personId = shortid.generate();
   const person = {
@@ -56,9 +60,9 @@ app.post('/api/accounts/:accountId/people', async (req, res) => {
     info: ''
   };
   people.push(person);
-  await connectRunClose('accounts', accounts => accounts.updateOne(
-    { accountId },
-    { $set: { people } }));
+  await connectRunClose('accounts', accounts =>
+    accounts.updateOne({ accountId }, { $set: { people } })
+  );
   res.send(HttpStatus.CREATED, person);
 });
 
