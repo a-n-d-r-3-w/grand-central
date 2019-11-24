@@ -90,6 +90,20 @@ app.get('/api/accounts/:accountId/people', async (req, res) => {
   res.send(HttpStatus.OK, people);
 });
 
+app.put('/api/accounts/:accountId/people/:personId', async (req, res) => {
+  const { accountId, personId } = req.params;
+  const account = await connectRunClose('accounts', accounts =>
+    accounts.findOne({ accountId })
+  );
+  const { people } = account;
+  const index = people.findIndex(person => person.personId === personId);
+  people[index] = { ...people[index], ...req.body };
+  await connectRunClose('accounts', accounts =>
+    accounts.updateOne({ accountId }, { $set: { people } })
+  );
+  res.send(HttpStatus.NO_CONTENT);
+});
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
