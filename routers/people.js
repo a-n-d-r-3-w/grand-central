@@ -7,13 +7,15 @@ const connectRunClose = require('../connectRunClose');
 const router = express.Router();
 router.use(bodyParser.json());
 
+const ACCOUNTS_COLLECTION_NAME = 'accounts';
+
 const getAccount = async accountId =>
-  await connectRunClose('accounts', accounts =>
+  await connectRunClose(ACCOUNTS_COLLECTION_NAME, accounts =>
     accounts.findOne({ accountId })
   );
 
 const setPeople = async (accountId, people) => {
-  await connectRunClose('accounts', accounts =>
+  await connectRunClose(ACCOUNTS_COLLECTION_NAME, accounts =>
     accounts.updateOne({ accountId }, { $set: { people } })
   );
 };
