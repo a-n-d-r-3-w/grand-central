@@ -7,6 +7,7 @@ const HttpStatus = require('http-status-codes');
 const router = express.Router();
 router.use(bodyParser.json());
 
+// Create person
 router.post('/', async (req, res) => {
   if (!req.body) {
     res.send(HttpStatus.BAD_REQUEST, 'Name is missing.');
@@ -37,6 +38,7 @@ router.post('/', async (req, res) => {
   res.send(HttpStatus.CREATED, person);
 });
 
+// Get people
 router.get('/', async (req, res) => {
   const { accountId } = req.forwardedParams;
   const account = await connectRunClose('accounts', accounts =>
@@ -61,6 +63,7 @@ router.get('/', async (req, res) => {
   res.send(HttpStatus.OK, people);
 });
 
+// Modify person
 router.put('/:personId', async (req, res) => {
   const { accountId, personId } = req.forwardedParams;
   const account = await connectRunClose('accounts', accounts =>

@@ -8,6 +8,7 @@ const people = require('./people');
 const router = express.Router();
 router.use(bodyParser.json());
 
+// Create account
 router.post('/', async (req, res) => {
   const accountId = shortid.generate();
   const result = await connectRunClose('accounts', async accounts => {
@@ -20,6 +21,7 @@ router.post('/', async (req, res) => {
   res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 });
 
+// Retrieve account
 router.get('/:accountId', async (req, res) => {
   const { accountId } = req.params;
   const account = await connectRunClose('accounts', accounts =>
@@ -32,6 +34,7 @@ router.get('/:accountId', async (req, res) => {
   res.status(HttpStatus.OK).json(account);
 });
 
+// Attach people router
 const forwardParams = (req, res, next) => {
   req.forwardedParams = { ...req.params };
   next();
