@@ -2,16 +2,17 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const HttpStatus = require('http-status-codes');
 const {
-  addPersonToAccount,
+  addPerson,
   getPeople,
-  updatePerson
+  updatePerson,
+  deletePerson
 } = require('./peopleUtils');
 
 const router = express.Router();
 router.use(bodyParser.json());
 
 router.post('/', async (req, res) => {
-  await addPersonToAccount(req.forwardedParams.accountId, req.body.name);
+  await addPerson(req.forwardedParams.accountId, req.body.name);
   res.sendStatus(HttpStatus.CREATED);
 });
 
@@ -23,6 +24,12 @@ router.get('/', async (req, res) => {
 router.put('/:personId', async (req, res) => {
   const { accountId, personId } = req.forwardedParams;
   await updatePerson(accountId, personId, req.body);
+  res.send(HttpStatus.NO_CONTENT);
+});
+
+router.delete('/:personId', async (req, res) => {
+  const { accountId, personId } = req.forwardedParams;
+  await deletePerson(accountId, personId);
   res.send(HttpStatus.NO_CONTENT);
 });
 

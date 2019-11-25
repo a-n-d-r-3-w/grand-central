@@ -35,7 +35,7 @@ const setPeople = async (accountId, people) => {
   );
 };
 
-const addPersonToAccount = async (accountId, name) => {
+const addPerson = async (accountId, name) => {
   const person = {
     personId: shortid.generate(),
     name,
@@ -53,8 +53,16 @@ const updatePerson = async (accountId, personId, newData) => {
   await setPeople(accountId, people);
 };
 
+const deletePerson = async (accountId, personId) => {
+  const people = await getPeople(accountId);
+  const index = people.findIndex(person => person.personId === personId);
+  people.splice(index, 1);
+  await setPeople(accountId, people);
+};
+
 module.exports = {
-  addPersonToAccount,
+  addPerson,
   getPeople,
-  updatePerson
+  updatePerson,
+  deletePerson
 };
