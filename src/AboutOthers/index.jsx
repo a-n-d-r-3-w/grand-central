@@ -19,7 +19,7 @@ function AboutOthers(props) {
         Create account
       </Button>
       {props.accounts.map(account => (
-        <div>{account.accountId}</div>
+        <div key={account.accountId}>{account.accountId}</div>
       ))}
     </>
   );

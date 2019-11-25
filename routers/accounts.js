@@ -11,7 +11,7 @@ router.use(bodyParser.json());
 router.post('/', async (req, res) => {
   const result = await createAccount();
   if (result.result.ok === 1) {
-    res.sendStatus(HttpStatus.CREATED);
+    res.status(HttpStatus.CREATED).json({ accountId: result.ops[0].accountId });
     return;
   }
   res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
