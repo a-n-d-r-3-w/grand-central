@@ -32,13 +32,11 @@ router.get('/:accountId', async (req, res) => {
   res.status(HttpStatus.OK).json(account);
 });
 
-router.use(
-  '/:accountId/people',
-  function(req, res, next) {
-    req.forwardedParams = { ...req.params };
-    next();
-  },
-  people
-);
+const forwardParams = (req, res, next) => {
+  req.forwardedParams = { ...req.params };
+  next();
+};
+
+router.use('/:accountId/people', forwardParams, people);
 
 module.exports = router;
