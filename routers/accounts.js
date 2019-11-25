@@ -1,9 +1,9 @@
-const express = require('express');
 const bodyParser = require('body-parser');
-const shortid = require('shortid');
+const express = require('express');
 const HttpStatus = require('http-status-codes');
-const connectRunClose = require('../connectRunClose');
+const shortid = require('shortid');
 const people = require('./people');
+const connectRunClose = require('../connectRunClose');
 
 const router = express.Router();
 router.use(bodyParser.json());
