@@ -12,6 +12,12 @@ const getAccount = async accountId =>
     accounts.findOne({ accountId })
   );
 
+const setPeople = async (accountId, people) => {
+  await connectRunClose('accounts', accounts =>
+    accounts.updateOne({ accountId }, { $set: { people } })
+  );
+};
+
 // Create person
 router.post('/', async (req, res) => {
   if (!req.body) {
@@ -35,21 +41,11 @@ router.post('/', async (req, res) => {
     info: ''
   };
   people.push(person);
-  await connectRunClose('accounts', accounts =>
-    accounts.updateOne({ accountId }, { $set: { people } })
-  );
+  await setPeople(accountId, people);
   res.send(HttpStatus.CREATED, person);
 });
 
-// Get people
-router.get('/', async (req, res) => {
-  const { accountId } = req.forwardedParams;
-  const account = await getAccount(accountId);
-  if (account === null) {
-    res.send(HttpStatus.NOT_FOUND);
-    return;
-  }
-  const { people } = account;
+const sortPeople = people => {
   people.sort((person1, person2) => {
     const name1 = person1.name.toLowerCase();
     const name2 = person2.name.toLowerCase();
@@ -61,6 +57,18 @@ router.get('/', async (req, res) => {
     }
     return 0;
   });
+};
+
+// Get people
+router.get('/', async (req, res) => {
+  const { accountId } = req.forwardedParams;
+  const account = await getAccount(accountId);
+  if (account === null) {
+    res.send(HttpStatus.NOT_FOUND);
+    return;
+  }
+  const { people } = account;
+  sortPeople(people);
   res.send(HttpStatus.OK, people);
 });
 
@@ -75,9 +83,7 @@ router.put('/:personId', async (req, res) => {
   const { people } = account;
   const index = people.findIndex(person => person.personId === personId);
   people[index] = { ...people[index], ...req.body };
-  await connectRunClose('accounts', accounts =>
-    accounts.updateOne({ accountId }, { $set: { people } })
-  );
+  await setPeople(accountId, people);
   res.send(HttpStatus.NO_CONTENT);
 });
 
