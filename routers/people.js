@@ -7,6 +7,11 @@ const HttpStatus = require('http-status-codes');
 const router = express.Router();
 router.use(bodyParser.json());
 
+const getAccount = async accountId =>
+  await connectRunClose('accounts', accounts =>
+    accounts.findOne({ accountId })
+  );
+
 // Create person
 router.post('/', async (req, res) => {
   if (!req.body) {
@@ -21,9 +26,7 @@ router.post('/', async (req, res) => {
   }
 
   const { accountId } = req.forwardedParams;
-  const account = await connectRunClose('accounts', accounts =>
-    accounts.findOne({ accountId })
-  );
+  const account = await getAccount(accountId);
   const { people } = account;
   const personId = shortid.generate();
   const person = {
@@ -41,9 +44,7 @@ router.post('/', async (req, res) => {
 // Get people
 router.get('/', async (req, res) => {
   const { accountId } = req.forwardedParams;
-  const account = await connectRunClose('accounts', accounts =>
-    accounts.findOne({ accountId })
-  );
+  const account = await getAccount(accountId);
   if (account === null) {
     res.send(HttpStatus.NOT_FOUND);
     return;
@@ -66,9 +67,11 @@ router.get('/', async (req, res) => {
 // Modify person
 router.put('/:personId', async (req, res) => {
   const { accountId, personId } = req.forwardedParams;
-  const account = await connectRunClose('accounts', accounts =>
-    accounts.findOne({ accountId })
-  );
+  const account = await getAccount(accountId);
+  if (account === null) {
+    res.send(HttpStatus.NOT_FOUND);
+    return;
+  }
   const { people } = account;
   const index = people.findIndex(person => person.personId === personId);
   people[index] = { ...people[index], ...req.body };
