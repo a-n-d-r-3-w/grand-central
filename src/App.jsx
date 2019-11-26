@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import AboutOthers from './AboutOthers/index';
-import AboutOthersAccount from './AboutOthers/AboutOthersAccount';
 import './App.css';
 
 const App = () => {
