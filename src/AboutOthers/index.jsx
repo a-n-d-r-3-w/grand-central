@@ -6,6 +6,7 @@ const chance = new Chance();
 
 const AboutOthers = () => {
   const [people, setPeople] = useState([]);
+  const [selectedPersonId, setSelectedPersonId] = useState(null);
 
   useEffect(() => {
     async function getPeople() {
@@ -28,13 +29,13 @@ const AboutOthers = () => {
   return (
     <>
       <h1>About Others</h1>
-      <ul>
-        {people.map(person => (
-          <li key={person.personId}>
-            <a href="#">{person.name}</a>
-          </li>
-        ))}
-      </ul>
+      {people.map(person => (
+        <div key={person.personId}>
+          <button onClick={() => setSelectedPersonId(person.personId)}>
+            {person.name}
+          </button>
+        </div>
+      ))}
       <button onClick={onClickAddPerson}>Add person</button>
     </>
   );
