@@ -26,9 +26,6 @@ const App = () => {
             </ul>
           </nav>
           <Switch>
-            <Route path="/about-others/:accountId">
-              <AboutOthersAccount />
-            </Route>
             <Route path="/about-others">
               <AboutOthers />
             </Route>

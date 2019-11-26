@@ -12,8 +12,8 @@ const router = express.Router();
 router.use(bodyParser.json());
 
 router.post('/', async (req, res) => {
-  await addPerson(req.forwardedParams.accountId, req.body.name);
-  res.sendStatus(HttpStatus.CREATED);
+  const result = await addPerson(req.body.name);
+  res.send(HttpStatus.CREATED, result.ops[0]);
 });
 
 router.get('/', async (req, res) => {

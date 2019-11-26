@@ -1,12 +1,10 @@
 const shortid = require('shortid');
 const connectRunClose = require('../connectRunClose');
 
-const ACCOUNTS_COLLECTION_NAME = 'accounts';
+const PEOPLE = 'people';
 
 const getAccount = async accountId =>
-  await connectRunClose(ACCOUNTS_COLLECTION_NAME, accounts =>
-    accounts.findOne({ accountId })
-  );
+  await connectRunClose(PEOPLE, accounts => accounts.findOne({ accountId }));
 
 const sortPeople = people => {
   people.sort((person1, person2) => {
@@ -30,20 +28,18 @@ const getPeople = async accountId => {
 };
 
 const setPeople = async (accountId, people) => {
-  await connectRunClose(ACCOUNTS_COLLECTION_NAME, accounts =>
+  await connectRunClose(PEOPLE, accounts =>
     accounts.updateOne({ accountId }, { $set: { people } })
   );
 };
 
-const addPerson = async (accountId, name) => {
+const addPerson = async name => {
   const person = {
     personId: shortid.generate(),
     name,
     info: ''
   };
-  const people = await getPeople(accountId);
-  people.push(person);
-  await setPeople(accountId, people);
+  return await connectRunClose(PEOPLE, people => people.insertOne(person));
 };
 
 const updatePerson = async (accountId, personId, newData) => {

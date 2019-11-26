@@ -1,17 +1,14 @@
-import { CREATE_ACCOUNT } from './aboutOthersActions';
-
 const initialState = {
-  accountId: null
+  people: []
 };
 
 export const aboutOthersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_ACCOUNT:
-      if (!action.accountId) {
-        throw new Error('accountId is falsy.');
-      }
+    case 'ADD_PERSON':
+      const people = JSON.parse(JSON.stringify(state.people));
+      people.push(action.person);
       return {
-        accountId: action.accountId
+        people
       };
     default:
       return state;

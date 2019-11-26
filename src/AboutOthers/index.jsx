@@ -1,37 +1,39 @@
-import React, { useEffect } from 'react';
-import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
-import { createAccount } from './aboutOthersActions';
+import Chance from 'chance';
+import React from 'react';
+import axios from 'axios';
+import shortid from 'shortid';
+import { useSelector, useDispatch } from 'react-redux';
 
-const AboutOthers = props => {
-  const handleClickCreateAccount = () => {
-    props.createAccount();
+const chance = new Chance();
+
+const AboutOthers = () => {
+  const people = useSelector(state => state.aboutOthers.people);
+  const dispatch = useDispatch();
+
+  const onClickAddPerson = async () => {
+    const name = chance.name();
+
+    const response = await axios.post('/api/about-others/people', { name });
+
+    dispatch({
+      type: 'ADD_PERSON',
+      person: {
+        id: shortid.generate(),
+        name,
+        notes: ''
+      }
+    });
   };
-
-  useEffect(() => {
-    if (props.accountId) {
-      window.location.href += `/${props.accountId}`;
-    }
-  });
 
   return (
     <>
       <h1>About Others</h1>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleClickCreateAccount}
-      >
-        Create account
-      </Button>
+      {people.map(person => (
+        <div>{person.name}</div>
+      ))}
+      <button onClick={onClickAddPerson}>Add person</button>
     </>
   );
 };
 
-const mapStateToProps = state => ({
-  accountId: state.aboutOthersReducer.accountId
-});
-
-const mapDispatchToProps = { createAccount };
-
-export default connect(mapStateToProps, mapDispatchToProps)(AboutOthers);
+export default AboutOthers;
