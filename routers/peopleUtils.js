@@ -20,11 +20,8 @@ const sortPeople = people => {
   });
 };
 
-const getPeople = async accountId => {
-  const account = await getAccount(accountId);
-  const people = account.people;
-  sortPeople(people);
-  return people;
+const getPeople = async () => {
+  return await connectRunClose(PEOPLE, people => people.find({}).toArray());
 };
 
 const setPeople = async (accountId, people) => {
@@ -37,7 +34,7 @@ const addPerson = async name => {
   const person = {
     personId: shortid.generate(),
     name,
-    info: ''
+    notes: ''
   };
   return await connectRunClose(PEOPLE, people => people.insertOne(person));
 };

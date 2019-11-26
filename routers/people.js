@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  const people = await getPeople(req.forwardedParams.accountId);
+  const people = await getPeople();
   res.send(HttpStatus.OK, people);
 });
 
