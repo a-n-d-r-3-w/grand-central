@@ -28,11 +28,13 @@ const AboutOthers = () => {
   return (
     <>
       <h1>About Others</h1>
-      {people.map(person => (
-        <div key={person.personId}>
-          <a href="#">{person.name}</a>
-        </div>
-      ))}
+      <ul>
+        {people.map(person => (
+          <li key={person.personId}>
+            <a href="#">{person.name}</a>
+          </li>
+        ))}
+      </ul>
       <button onClick={onClickAddPerson}>Add person</button>
     </>
   );
