@@ -21,7 +21,11 @@ const sortPeople = people => {
 };
 
 const getPeople = async () => {
-  return await connectRunClose(PEOPLE, people => people.find({}).toArray());
+  const people = await connectRunClose(PEOPLE, people =>
+    people.find({}).toArray()
+  );
+  sortPeople(people);
+  return people;
 };
 
 const setPeople = async (accountId, people) => {
