@@ -61,7 +61,12 @@ const AboutOthers = () => {
       <h1>About {selectedPerson.name}</h1>
       <button onClick={onClickBack}>Back</button>
       <div>
-        <textarea value={selectedPerson.notes} onChange={onChangeNotes} />
+        <textarea
+          value={selectedPerson.notes}
+          onChange={onChangeNotes}
+          rows="26"
+          cols="36"
+        />
       </div>
     </>
   );
