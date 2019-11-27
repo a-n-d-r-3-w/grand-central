@@ -27,9 +27,11 @@ const AboutOthers = () => {
     setPeople(people);
   };
 
-  const onClickDeletePerson = async personId => {
-    await axios.delete(`/api/about-others/people/${personId}`);
-    await getPeople();
+  const onClickDeletePerson = async person => {
+    if (window.confirm(`Delete ${person.name}?`)) {
+      await axios.delete(`/api/about-others/people/${person.personId}`);
+      await getPeople();
+    }
   };
 
   const onClickBack = async () => {
@@ -55,9 +57,7 @@ const AboutOthers = () => {
           <button onClick={() => setSelectedPerson(person)}>
             {person.name}
           </button>
-          <button onClick={() => onClickDeletePerson(person.personId)}>
-            X
-          </button>
+          <button onClick={() => onClickDeletePerson(person)}>X</button>
         </div>
       ))}
       <button onClick={onClickAddPerson}>Add person</button>
