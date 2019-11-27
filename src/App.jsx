@@ -10,33 +10,35 @@ const App = () => {
     <Router>
       <CssBaseline />
       <Container maxWidth="sm">
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Grand Central</Link>
-              </li>
-              <li>
-                <Link to="/about-others">About Others</Link>
-              </li>
-            </ul>
-          </nav>
-          <Switch>
-            <Route path="/about-others">
-              <AboutOthers />
-            </Route>
-            <Route path="/">
-              <GrandCentral />
-            </Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/about-others">
+            <AboutOthers />
+          </Route>
+          <Route path="/">
+            <GrandCentral />
+          </Route>
+        </Switch>
       </Container>
     </Router>
   );
 };
 
 function GrandCentral() {
-  return <h1>Grand Central</h1>;
+  return (
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Grand Central</Link>
+          </li>
+          <li>
+            <Link to="/about-others">About Others</Link>
+          </li>
+        </ul>
+      </nav>
+      <h1>Grand Central</h1>
+    </>
+  );
 }
 
 export default App;
