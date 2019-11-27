@@ -60,7 +60,9 @@ const AboutOthers = () => {
     <>
       <h1>About {selectedPerson.name}</h1>
       <button onClick={onClickBack}>Back</button>
-      <textarea value={selectedPerson.notes} onChange={onChangeNotes} />
+      <div>
+        <textarea value={selectedPerson.notes} onChange={onChangeNotes} />
+      </div>
     </>
   );
 
