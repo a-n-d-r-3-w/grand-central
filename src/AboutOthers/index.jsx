@@ -8,14 +8,15 @@ const AboutOthers = () => {
   const [people, setPeople] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
 
+  const getPeople = async () => {
+    const response = await axios.get('/api/about-others/people');
+    const people = response.data;
+    setPeople(people);
+  };
+
   useEffect(() => {
-    async function getPeople() {
-      const response = await axios.get('/api/about-others/people');
-      const people = response.data;
-      setPeople(people);
-    }
     getPeople();
-  });
+  }, []);
 
   const onClickAddPerson = async () => {
     const name = chance.name();
@@ -26,14 +27,19 @@ const AboutOthers = () => {
     setPeople(people);
   };
 
-  const onClickBack = () => {
+  const onClickBack = async () => {
+    await getPeople();
     setSelectedPerson(null);
   };
 
-  const onChangeNotes = event => {
+  const onChangeNotes = async event => {
     const updatedPerson = { ...selectedPerson };
-    updatedPerson.notes = event.target.value;
+    const newNotes = event.target.value;
+    updatedPerson.notes = newNotes;
     setSelectedPerson(updatedPerson);
+    await axios.put(`/api/about-others/people/${selectedPerson.personId}`, {
+      newNotes
+    });
   };
 
   const aboutOthers = (

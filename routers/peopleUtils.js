@@ -43,11 +43,11 @@ const addPerson = async name => {
   return await connectRunClose(PEOPLE, people => people.insertOne(person));
 };
 
-const updatePerson = async (accountId, personId, newData) => {
-  const people = await getPeople(accountId);
-  const index = people.findIndex(person => person.personId === personId);
-  people[index] = { ...people[index], ...newData };
-  await setPeople(accountId, people);
+const updateNotesForPerson = async (personId, newNotes) => {
+  console.log(personId, newNotes);
+  await connectRunClose(PEOPLE, people =>
+    people.findOneAndUpdate({ personId }, { $set: { notes: newNotes } })
+  );
 };
 
 const deletePerson = async (accountId, personId) => {
@@ -60,6 +60,6 @@ const deletePerson = async (accountId, personId) => {
 module.exports = {
   addPerson,
   getPeople,
-  updatePerson,
+  updateNotesForPerson,
   deletePerson
 };

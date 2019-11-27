@@ -4,7 +4,7 @@ const HttpStatus = require('http-status-codes');
 const {
   addPerson,
   getPeople,
-  updatePerson,
+  updateNotesForPerson,
   deletePerson
 } = require('./peopleUtils');
 
@@ -18,12 +18,12 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
   const people = await getPeople();
+  res.set('Cache-Control', 'no-store');
   res.status(HttpStatus.OK).send(people);
 });
 
 router.put('/:personId', async (req, res) => {
-  const { accountId, personId } = req.forwardedParams;
-  await updatePerson(accountId, personId, req.body);
+  await updateNotesForPerson(req.params.personId, req.body.newNotes);
   res.sendStatus(HttpStatus.NO_CONTENT);
 });
 
