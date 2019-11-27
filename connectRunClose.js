@@ -5,7 +5,7 @@ if (DB_URL == null || DB_URL === '') {
   DB_URL = 'mongodb://localhost:27017';
 }
 
-const DB_NAME = 'aboutothers';
+const DB_NAME = 'heroku_w62mgdk4';
 
 module.exports = async (collectionName, fn) => {
   const client = new MongoClient(DB_URL, { useUnifiedTopology: true });
