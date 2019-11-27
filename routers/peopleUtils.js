@@ -50,11 +50,8 @@ const updateNotesForPerson = async (personId, newNotes) => {
   );
 };
 
-const deletePerson = async (accountId, personId) => {
-  const people = await getPeople(accountId);
-  const index = people.findIndex(person => person.personId === personId);
-  people.splice(index, 1);
-  await setPeople(accountId, people);
+const deletePerson = async personId => {
+  await connectRunClose(PEOPLE, people => people.deleteOne({ personId }));
 };
 
 module.exports = {

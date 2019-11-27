@@ -28,8 +28,7 @@ router.put('/:personId', async (req, res) => {
 });
 
 router.delete('/:personId', async (req, res) => {
-  const { accountId, personId } = req.forwardedParams;
-  await deletePerson(accountId, personId);
+  await deletePerson(req.params.personId);
   res.sendStatus(HttpStatus.NO_CONTENT);
 });
 
