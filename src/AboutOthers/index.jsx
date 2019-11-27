@@ -5,6 +5,7 @@ const AboutOthers = () => {
   const [people, setPeople] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [saveTimeoutId, setSaveTimeoutId] = useState(null);
+  const [isSynced, setIsSynced] = useState(true);
 
   const getPeople = async () => {
     const response = await axios.get('/api/about-others/people');
@@ -39,6 +40,7 @@ const AboutOthers = () => {
   };
 
   const onChangeNotes = async event => {
+    setIsSynced(false);
     if (saveTimeoutId) {
       window.clearTimeout(saveTimeoutId);
     }
@@ -47,10 +49,11 @@ const AboutOthers = () => {
     updatedPerson.notes = newNotes;
     setSelectedPerson(updatedPerson);
     setSaveTimeoutId(
-      window.setTimeout(() => {
-        axios.put(`/api/about-others/people/${selectedPerson.personId}`, {
+      window.setTimeout(async () => {
+        await axios.put(`/api/about-others/people/${selectedPerson.personId}`, {
           newNotes
         });
+        setIsSynced(true);
       }, 1000)
     );
   };
@@ -73,7 +76,8 @@ const AboutOthers = () => {
   const aboutPerson = selectedPerson && (
     <>
       <h1>About {selectedPerson.name}</h1>
-      <button onClick={onClickBack}>Back</button>
+      <button onClick={onClickBack}>Back</button>{' '}
+      <span>{isSynced ? 'Synced' : 'Syncing...'}</span>
       <div>
         <textarea
           value={selectedPerson.notes}

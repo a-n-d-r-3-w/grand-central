@@ -44,7 +44,6 @@ const addPerson = async name => {
 };
 
 const updateNotesForPerson = async (personId, newNotes) => {
-  console.log(personId, newNotes);
   await connectRunClose(PEOPLE, people =>
     people.findOneAndUpdate({ personId }, { $set: { notes: newNotes } })
   );
