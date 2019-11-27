@@ -6,7 +6,7 @@ const chance = new Chance();
 
 const AboutOthers = () => {
   const [people, setPeople] = useState([]);
-  const [selectedPersonId, setSelectedPersonId] = useState(null);
+  const [selectedPerson, setSelectedPerson] = useState(null);
 
   useEffect(() => {
     async function getPeople() {
@@ -26,12 +26,16 @@ const AboutOthers = () => {
     setPeople(people);
   };
 
-  return (
+  const onClickBack = async () => {
+    setSelectedPerson(null);
+  };
+
+  const aboutOthers = (
     <>
       <h1>About Others</h1>
       {people.map(person => (
         <div key={person.personId}>
-          <button onClick={() => setSelectedPersonId(person.personId)}>
+          <button onClick={() => setSelectedPerson(person)}>
             {person.name}
           </button>
         </div>
@@ -39,6 +43,15 @@ const AboutOthers = () => {
       <button onClick={onClickAddPerson}>Add person</button>
     </>
   );
+
+  const aboutPerson = (
+    <>
+      <h1>About {selectedPerson && selectedPerson.name}</h1>
+      <button onClick={onClickBack}>Back</button>
+    </>
+  );
+
+  return selectedPerson ? aboutPerson : aboutOthers;
 };
 
 export default AboutOthers;
