@@ -1,7 +1,10 @@
 const { MongoClient } = require('mongodb');
 
-const DB_URL = 'mongodb://localhost:27017';
-// const DB_URL = process.env.DB_URL
+let DB_URL = process.env.DB_URL;
+if (DB_URL == null || DB_URL === '') {
+  DB_URL = 'mongodb://localhost:27017';
+}
+
 const DB_NAME = 'aboutothers';
 
 module.exports = async (collectionName, fn) => {
