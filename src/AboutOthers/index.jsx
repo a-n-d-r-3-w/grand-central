@@ -1,8 +1,5 @@
-import Chance from 'chance';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-const chance = new Chance();
 
 const AboutOthers = () => {
   const [people, setPeople] = useState([]);
