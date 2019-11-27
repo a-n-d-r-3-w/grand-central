@@ -19,17 +19,11 @@ const App = () => {
               <li>
                 <Link to="/about-others">About Others</Link>
               </li>
-              <li>
-                <Link to="/another-app">Another App</Link>
-              </li>
             </ul>
           </nav>
           <Switch>
             <Route path="/about-others">
               <AboutOthers />
-            </Route>
-            <Route path="/another-app">
-              <AnotherApp />
             </Route>
             <Route path="/">
               <GrandCentral />
@@ -43,10 +37,6 @@ const App = () => {
 
 function GrandCentral() {
   return <h1>Grand Central</h1>;
-}
-
-function AnotherApp() {
-  return <h1>Another App</h1>;
 }
 
 export default App;
