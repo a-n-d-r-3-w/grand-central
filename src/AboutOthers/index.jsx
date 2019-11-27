@@ -19,12 +19,13 @@ const AboutOthers = () => {
   }, []);
 
   const onClickAddPerson = async () => {
-    const name = chance.name();
-
-    await axios.post('/api/about-others/people', { name });
-    const response = await axios.get('/api/about-others/people');
-    const people = response.data;
-    setPeople(people);
+    const name = window.prompt('Name:');
+    if (name && name.trim().length > 0) {
+      await axios.post('/api/about-others/people', { name });
+      const response = await axios.get('/api/about-others/people');
+      const people = response.data;
+      setPeople(people);
+    }
   };
 
   const onClickDeletePerson = async person => {
