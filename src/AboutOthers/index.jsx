@@ -4,6 +4,7 @@ import axios from 'axios';
 const AboutOthers = () => {
   const [people, setPeople] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
+  const [saveTimeoutId, setSaveTimeoutId] = useState(null);
 
   const getPeople = async () => {
     const response = await axios.get('/api/about-others/people');
@@ -38,13 +39,20 @@ const AboutOthers = () => {
   };
 
   const onChangeNotes = async event => {
+    if (saveTimeoutId) {
+      window.clearTimeout(saveTimeoutId);
+    }
     const updatedPerson = { ...selectedPerson };
     const newNotes = event.target.value;
     updatedPerson.notes = newNotes;
     setSelectedPerson(updatedPerson);
-    await axios.put(`/api/about-others/people/${selectedPerson.personId}`, {
-      newNotes
-    });
+    setSaveTimeoutId(
+      window.setTimeout(() => {
+        axios.put(`/api/about-others/people/${selectedPerson.personId}`, {
+          newNotes
+        });
+      }, 1000)
+    );
   };
 
   const aboutOthers = (
