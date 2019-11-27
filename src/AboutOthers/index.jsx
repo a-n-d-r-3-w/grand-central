@@ -26,8 +26,14 @@ const AboutOthers = () => {
     setPeople(people);
   };
 
-  const onClickBack = async () => {
+  const onClickBack = () => {
     setSelectedPerson(null);
+  };
+
+  const onChangeNotes = event => {
+    const updatedPerson = { ...selectedPerson };
+    updatedPerson.notes = event.target.value;
+    setSelectedPerson(updatedPerson);
   };
 
   const aboutOthers = (
@@ -44,10 +50,11 @@ const AboutOthers = () => {
     </>
   );
 
-  const aboutPerson = (
+  const aboutPerson = selectedPerson && (
     <>
-      <h1>About {selectedPerson && selectedPerson.name}</h1>
+      <h1>About {selectedPerson.name}</h1>
       <button onClick={onClickBack}>Back</button>
+      <textarea value={selectedPerson.notes} onChange={onChangeNotes} />
     </>
   );
 
