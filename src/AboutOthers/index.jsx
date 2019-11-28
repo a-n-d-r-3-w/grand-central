@@ -95,10 +95,18 @@ const AboutOthers = () => {
   );
 
   const aboutPerson = selectedPerson && (
-    <>
+    <div className="container mt-3">
       <h1>About {selectedPerson.name}</h1>
-      <button onClick={onClickBack}>Back</button>{' '}
-      <span>{isSynced ? 'Synced' : 'Syncing...'}</span>
+      <div className="my-3">
+        <button
+          type="button"
+          className="btn btn-outline-primary btn-sm px-3"
+          onClick={onClickBack}
+        >
+          Back
+        </button>{' '}
+        <span>{isSynced ? 'Synced' : 'Syncing...'}</span>
+      </div>
       <div>
         <textarea
           value={selectedPerson.notes}
@@ -107,7 +115,7 @@ const AboutOthers = () => {
           cols="36"
         />
       </div>
-    </>
+    </div>
   );
 
   return selectedPerson ? aboutPerson : aboutOthers;
