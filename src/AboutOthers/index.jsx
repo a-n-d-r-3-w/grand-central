@@ -59,7 +59,7 @@ const AboutOthers = () => {
   };
 
   const aboutOthers = (
-    <>
+    <div className="container mt-3">
       <h1>About Others</h1>
       <ul className="list-group list-group-flush">
         {people.map(person => (
@@ -86,12 +86,12 @@ const AboutOthers = () => {
       </ul>
       <button
         type="button"
-        className="btn btn-primary"
+        className="btn btn-primary my-3"
         onClick={onClickAddPerson}
       >
         Add person
       </button>
-    </>
+    </div>
   );
 
   const aboutPerson = selectedPerson && (
