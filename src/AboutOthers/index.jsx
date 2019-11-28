@@ -60,7 +60,7 @@ const AboutOthers = () => {
 
   const aboutOthers = (
     <div className="container mt-3">
-      <h1>About Others</h1>
+      <h4>About Others</h4>
       <ul className="list-group list-group-flush">
         {people.map(person => (
           <li
@@ -96,7 +96,7 @@ const AboutOthers = () => {
 
   const aboutPerson = selectedPerson && (
     <div className="container mt-3">
-      <h1>About {selectedPerson.name}</h1>
+      <h4>About {selectedPerson.name}</h4>
       <div>
         <button
           type="button"
@@ -117,10 +117,10 @@ const AboutOthers = () => {
       </div>
       <div>
         <textarea
+          className="w-100 h-100"
           value={selectedPerson.notes}
           onChange={onChangeNotes}
-          rows="26"
-          cols="36"
+          rows="16"
         />
       </div>
     </div>
