@@ -115,12 +115,12 @@ const AboutOthers = () => {
           </div>
         )}
       </div>
-      <div>
+      <div className="form-group">
         <textarea
-          className="w-100 h-100"
+          className="form-control"
           value={selectedPerson.notes}
           onChange={onChangeNotes}
-          rows="16"
+          rows="14"
         />
       </div>
     </div>
