@@ -97,15 +97,23 @@ const AboutOthers = () => {
   const aboutPerson = selectedPerson && (
     <div className="container mt-3">
       <h1>About {selectedPerson.name}</h1>
-      <div className="my-3">
+      <div>
         <button
           type="button"
-          className="btn btn-outline-primary btn-sm px-3"
+          className="btn btn-outline-primary btn-sm px-3 my-3"
           onClick={onClickBack}
         >
           Back
         </button>{' '}
-        <span>{isSynced ? 'Synced' : 'Syncing...'}</span>
+        {isSynced ? (
+          <div className="alert alert-success small" role="alert">
+            Synced
+          </div>
+        ) : (
+          <div className="alert alert-info small" role="alert">
+            Syncing...
+          </div>
+        )}
       </div>
       <div>
         <textarea
