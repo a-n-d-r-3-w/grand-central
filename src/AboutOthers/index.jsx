@@ -61,24 +61,29 @@ const AboutOthers = () => {
   const aboutOthers = (
     <>
       <h1>About Others</h1>
-      {people.map(person => (
-        <div key={person.personId}>
-          <button
-            type="button"
-            className="btn btn-link"
-            onClick={() => setSelectedPerson(person)}
+      <ul className="list-group list-group-flush">
+        {people.map(person => (
+          <li
+            className="list-group-item list-group-item-action"
+            key={person.personId}
           >
-            {person.name}
-          </button>
-          <button
-            type="button"
-            className="btn btn-outline-danger btn-sm"
-            onClick={() => onClickDeletePerson(person)}
-          >
-            Delete
-          </button>
-        </div>
-      ))}
+            <button
+              type="button"
+              className="btn btn-link"
+              onClick={() => setSelectedPerson(person)}
+            >
+              {person.name}
+            </button>
+            <button
+              type="button"
+              className="btn btn-outline-danger btn-sm"
+              onClick={() => onClickDeletePerson(person)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
       <button
         type="button"
         className="btn btn-primary"
