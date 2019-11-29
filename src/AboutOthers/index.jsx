@@ -120,7 +120,7 @@ const AboutOthers = () => {
           className="form-control"
           value={selectedPerson.notes}
           onChange={onChangeNotes}
-          rows="14"
+          rows="10"
         />
       </div>
     </div>
