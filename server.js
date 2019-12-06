@@ -55,4 +55,4 @@ const ONE_MINUTE = 60 * ONE_SECOND;
 const ONE_HOUR = 60 * ONE_MINUTE;
 
 // Start quotes email timer
-setInterval(sendEmail, ONE_HOUR);
+// setInterval(sendEmail, ONE_HOUR);
