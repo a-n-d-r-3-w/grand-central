@@ -7,7 +7,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/about-others">
+        <Route path="/616e64726577/about-others">
           <AboutOthers />
         </Route>
         <Route path="/">
@@ -25,9 +25,6 @@ function GrandCentral() {
         <ul>
           <li>
             <Link to="/">Grand Central</Link>
-          </li>
-          <li>
-            <Link to="/about-others">About Others</Link>
           </li>
         </ul>
       </nav>

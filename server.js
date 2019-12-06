@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.static('build'));
 
-app.use('/api/about-others/people', people);
+app.use('/616e64726577/api/about-others/people', people);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
