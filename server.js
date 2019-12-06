@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const people = require('./routers/people');
 const quotes = require('./routers/quotes');
+const { getQuotes } = require('./routers/quotesUtils');
 
 const app = express();
 
@@ -22,16 +23,17 @@ if (port == null || port === '') {
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
 
-// Start quotes email timer
-const sendEmail = () => {
+const sendEmail = async () => {
+  // Get random quote
+  const quotes = await getQuotes();
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+  // Send email
   const helper = require('sendgrid').mail;
   const from_email = new helper.Email('donotreply@quotes.com');
   const to_email = new helper.Email('liu.anray@gmail.com');
   const subject = 'Hello from Grand Central Quotes!';
-  const content = new helper.Content(
-    'text/plain',
-    'Being stuck is an honourable state and an essential part of improving thinking. - Thinking Mathematically'
-  );
+  const content = new helper.Content('text/plain', randomQuote.text);
   const mail = new helper.Mail(from_email, subject, to_email, content);
 
   const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
@@ -52,4 +54,5 @@ const ONE_SECOND = 1000;
 const ONE_MINUTE = 60 * ONE_SECOND;
 const ONE_HOUR = 60 * ONE_MINUTE;
 
+// Start quotes email timer
 setInterval(sendEmail, ONE_HOUR);
