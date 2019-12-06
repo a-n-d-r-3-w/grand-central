@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import AboutOthers from './AboutOthers/index';
+import AboutOthers from './AboutOthers';
+import Quotes from './Quotes';
 import './App.css';
 
 const App = () => {
@@ -9,6 +10,9 @@ const App = () => {
       <Switch>
         <Route path="/616e64726577/about-others">
           <AboutOthers />
+        </Route>
+        <Route path="/616e64726577/quotes">
+          <Quotes />
         </Route>
         <Route path="/">
           <GrandCentral />
