@@ -25,7 +25,7 @@
     "dev": "concurrently \"npm:client:dev\" \"npm:server:dev\"",
     "// Runs client and server in prod mode": "",
     "start": "concurrently \"npm:client:build\" \"npm:server:start\"",
-    "// Client-specific scripts.": "",
+    "// Client-specific scripts": "",
     "client:dev": "react-scripts start",
     "client:test": "react-scripts test",
     "client:build": "react-scripts build",
