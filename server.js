@@ -18,7 +18,7 @@ app.post('/616e64726577/api/email', (req, res) => {
 
   // Verify credentials
   if (
-    req.headers.authorization !== 'Basic b3B0aW11c3ByaW1lOnJvZGltdXNwcmltZQ=='
+    req.headers.authorization !== `Basic ${process.env.CLOUDMAILIN_BASIC_AUTH}`
   ) {
     // Access denied
     return res.status(401).send('Authentication failed.');
