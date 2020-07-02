@@ -30,7 +30,7 @@ const sendEmail = async () => {
 
   // Send email
   const helper = require('sendgrid').mail;
-  const from_email = new helper.Email('donotreply@quotes.com');
+  const from_email = new helper.Email('donotreply@sendgrid.me');
   const to_email = new helper.Email('liu.anray@gmail.com');
   const subject = 'Hello from Grand Central Quotes!';
   const content = new helper.Content('text/plain', randomQuote.text);
