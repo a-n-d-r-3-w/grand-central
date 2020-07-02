@@ -11,6 +11,9 @@ app.use(express.static('build'));
 
 app.use('/616e64726577/api/about-others/people', people);
 app.use('/616e64726577/api/quotes', quotes);
+app.post('/616e64726577/api/ohlife', (req, res) => {
+  res.status(200).send('Received email');
+});
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
