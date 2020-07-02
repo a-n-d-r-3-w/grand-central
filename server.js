@@ -11,8 +11,21 @@ app.use(express.static('build'));
 
 app.use('/616e64726577/api/about-others/people', people);
 app.use('/616e64726577/api/quotes', quotes);
-app.post('/616e64726577/api/ohlife', (req, res) => {
-  res.status(200).send('Received email');
+app.post('/616e64726577/api/email', (req, res) => {
+  // Code to handle basic auth is from https://stackoverflow.com/a/33905671
+
+  // btoa('yourlogin:yourpassword') -> "eW91cmxvZ2luOnlvdXJwYXNzd29yZA=="
+
+  // Verify credentials
+  if (
+    req.headers.authorization !== 'Basic b3B0aW11c3ByaW1lOnIwZDFtdSRwcjFtMw=='
+  ) {
+    // Access denied
+    return res.status(401).send('Authentication failed.');
+  }
+
+  // Access granted
+  res.send('Received email');
 });
 
 app.get('/*', (req, res) => {
