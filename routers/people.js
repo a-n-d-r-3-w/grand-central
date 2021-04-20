@@ -6,7 +6,7 @@ const {
   getPeople,
   updateNotesForPerson,
   deletePerson
-} = require('./peopleUtilsMariaDb');
+} = require('./peopleUtils');
 
 const router = express.Router();
 router.use(bodyParser.json());

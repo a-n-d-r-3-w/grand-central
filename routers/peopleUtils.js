@@ -1,10 +1,5 @@
 const shortid = require('shortid');
-const connectRunClose = require('../connectRunClose');
-
-const PEOPLE = 'people';
-
-const getAccount = async accountId =>
-  await connectRunClose(PEOPLE, accounts => accounts.findOne({ accountId }));
+const connectQueryEnd = require('../connectQueryEnd');
 
 const sortPeople = people => {
   people.sort((person1, person2) => {
@@ -21,36 +16,25 @@ const sortPeople = people => {
 };
 
 const getPeople = async () => {
-  const people = await connectRunClose(PEOPLE, people =>
-    people.find({}).toArray()
-  );
+  const sql = `SELECT * FROM about_others.people;`;
+  const people = await connectQueryEnd(sql);
   sortPeople(people);
   return people;
 };
 
-const setPeople = async (accountId, people) => {
-  await connectRunClose(PEOPLE, accounts =>
-    accounts.updateOne({ accountId }, { $set: { people } })
-  );
-};
-
 const addPerson = async name => {
-  const person = {
-    personId: shortid.generate(),
-    name,
-    notes: ''
-  };
-  return await connectRunClose(PEOPLE, people => people.insertOne(person));
+  const sql = `INSERT INTO about_others.people (personId, name, notes) VALUES ("${shortid.generate()}", "${name}", "");`;
+  return await connectQueryEnd(sql);
 };
 
 const updateNotesForPerson = async (personId, newNotes) => {
-  await connectRunClose(PEOPLE, people =>
-    people.findOneAndUpdate({ personId }, { $set: { notes: newNotes } })
-  );
+  const sql = `UPDATE about_others.people SET notes="${newNotes}" WHERE personId="${personId}";`;
+  return await connectQueryEnd(sql);
 };
 
 const deletePerson = async personId => {
-  await connectRunClose(PEOPLE, people => people.deleteOne({ personId }));
+  const sql = `DELETE FROM about_others.people WHERE personId="${personId}";`
+  return await connectQueryEnd(sql);
 };
 
 module.exports = {
