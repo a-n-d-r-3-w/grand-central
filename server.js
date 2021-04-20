@@ -66,7 +66,9 @@ const sendEmail = async () => {
   });
 };
 
-sendEmail();
+// Disable because of error:
+// "The provided authorization grant is invalid, expired, or revoked"
+// sendEmail();
 
 const ONE_SECOND = 1000;
 const ONE_MINUTE = 60 * ONE_SECOND;

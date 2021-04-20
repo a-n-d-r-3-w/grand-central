@@ -6,14 +6,14 @@ const {
   getPeople,
   updateNotesForPerson,
   deletePerson
-} = require('./peopleUtils');
+} = require('./peopleUtilsMariaDb');
 
 const router = express.Router();
 router.use(bodyParser.json());
 
 router.post('/', async (req, res) => {
-  const result = await addPerson(req.body.name);
-  res.status(HttpStatus.CREATED).send(result.ops[0]);
+  await addPerson(req.body.name);
+  res.sendStatus(HttpStatus.CREATED);
 });
 
 router.get('/', async (req, res) => {
