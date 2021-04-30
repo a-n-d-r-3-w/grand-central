@@ -28,6 +28,7 @@ router.post('/', async (req, res, next) => {
 });
 
 const transporter = nodemailer.createTransport({
+    sendmail: true,
     host: process.env.OHLIFE_TRANSPORT_HOST,
     port: process.env.OHLIFE_TRANSPORT_PORT,
     secure: true,
