@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const people = require('./routers/people');
 const quotes = require('./routers/quotes');
-const { getQuotes } = require('./routers/quotesUtils');
+const sendMail = require('./routers/sendMail');
 
 const app = express();
 
@@ -12,22 +12,7 @@ app.use('/blog', express.static('blog'));
 
 app.use('/616e64726577/api/about-others/people', people);
 app.use('/616e64726577/api/quotes', quotes);
-app.post('/616e64726577/api/email', (req, res) => {
-  // Code to handle basic auth is from https://stackoverflow.com/a/33905671
-
-  // btoa('yourlogin:yourpassword') -> "eW91cmxvZ2luOnlvdXJwYXNzd29yZA=="
-
-  // Verify credentials
-  if (
-    req.headers.authorization !== `Basic ${process.env.CLOUDMAILIN_BASIC_AUTH}`
-  ) {
-    // Access denied
-    return res.status(401).send('Authentication failed.');
-  }
-
-  // Access granted
-  res.send('Received email');
-});
+app.use('/616e64726577/api/send-mail', sendMail);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
@@ -39,33 +24,6 @@ if (port == null || port === '') {
 }
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
-
-const sendEmail = async () => {
-  // Get random quote
-  const quotes = await getQuotes();
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-
-  // Send email
-  const helper = require('sendgrid').mail;
-  const from_email = new helper.Email('donotreply@sendgrid.me');
-  const to_email = new helper.Email('liu.anray@gmail.com');
-  const subject = 'Hello from Grand Central Quotes!';
-  const content = new helper.Content('text/plain', randomQuote.text);
-  const mail = new helper.Mail(from_email, subject, to_email, content);
-
-  const sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
-  const request = sg.emptyRequest({
-    method: 'POST',
-    path: '/v3/mail/send',
-    body: mail.toJSON()
-  });
-
-  sg.API(request, function(error, response) {
-    console.log(response.statusCode);
-    console.log(response.body);
-    console.log(response.headers);
-  });
-};
 
 // Disable because of error:
 // "The provided authorization grant is invalid, expired, or revoked"
