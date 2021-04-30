@@ -8,6 +8,7 @@ const { getQuotes } = require('./routers/quotesUtils');
 const app = express();
 
 app.use(express.static('build'));
+app.use('/blog', express.static('blog'));
 
 app.use('/616e64726577/api/about-others/people', people);
 app.use('/616e64726577/api/quotes', quotes);
