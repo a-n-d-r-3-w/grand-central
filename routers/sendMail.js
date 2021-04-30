@@ -3,7 +3,6 @@ const express = require('express');
 const cookieParser = require('cookie-parser')
 const HttpStatus = require('http-status-codes');
 const nodemailer = require("nodemailer");
-const { getQuotes } = require('./quotesUtils');
 
 const router = express.Router();
 router.use(bodyParser.json());
@@ -39,20 +38,12 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = async () => {
-    // Get random quote
-    const quotes = await getQuotes();
-    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-
     const info = await transporter.sendMail({
         from: process.env.OHLIFE_MAIL_FROM,
         to: process.env.OHLIFE_MAIL_TO,
         subject: "Here's what you wrote on XX/XX/XXXX",
-        text: randomQuote.text,
+        text: "randomQuote.text",
     });
-
-    console.log("Message sent: %s", info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
     return info.messageId;
 };
 
