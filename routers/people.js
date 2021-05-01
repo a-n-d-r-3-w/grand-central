@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 const HttpStatus = require('http-status-codes');
 const {
   addPerson,
@@ -11,7 +11,7 @@ const {
 
 const router = express.Router();
 router.use(bodyParser.json());
-router.use(cookieParser())
+router.use(cookieParser());
 
 router.use(async (req, res, next) => {
   const digestHex = req.cookies['about_others_digest_hex'];
@@ -20,7 +20,7 @@ router.use(async (req, res, next) => {
   } else {
     next();
   }
-})
+});
 
 router.post('/', async (req, res) => {
   await addPerson(req.body.name);

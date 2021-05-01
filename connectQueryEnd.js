@@ -17,14 +17,14 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = sql => {
-  return pool.getConnection()
-    .then(connection => {
-      return connection.query(sql)
-        .catch(error => {
-          console.error(error);
-        })
-        .finally(() => {
-          connection.end();
-        });
-    });
+  return pool.getConnection().then(connection => {
+    return connection
+      .query(sql)
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(() => {
+        connection.end();
+      });
+  });
 };

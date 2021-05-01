@@ -33,7 +33,7 @@ const updateNotesForPerson = async (personId, newNotes) => {
 };
 
 const deletePerson = async personId => {
-  const sql = `DELETE FROM about_others.people WHERE personId="${personId}";`
+  const sql = `DELETE FROM about_others.people WHERE personId="${personId}";`;
   return await connectQueryEnd(sql);
 };
 
