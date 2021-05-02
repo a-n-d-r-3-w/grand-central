@@ -22,10 +22,11 @@ router.post('/', async (req, res) => {
     return;
   }
   const token = crypto.randomBytes(16).toString('hex');
+  global.token = token;
   res.cookie('token', token, {
     httpOnly: true
   });
-  res.send('Logged in!');
+  res.redirect('/616e64726577/about-others');
 });
 
 module.exports = router;

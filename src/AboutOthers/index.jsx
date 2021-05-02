@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// From https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest
-const digestMessage = async message => {
-  const msgUint8 = new TextEncoder().encode(message);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-  return hashHex;
-};
-
 const AboutOthers = () => {
   const [people, setPeople] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
@@ -23,14 +14,7 @@ const AboutOthers = () => {
   };
 
   useEffect(() => {
-    const passcode = window.prompt('Passcode:');
-    const storeDigestAndGetPeople = async () => {
-      const digestHex = await digestMessage(passcode);
-      document.cookie = `about_others_digest_hex=${digestHex}; SameSite=Strict`;
-      await getPeople();
-    };
-
-    storeDigestAndGetPeople();
+    getPeople();
   }, []);
 
   const onClickAddPerson = async () => {

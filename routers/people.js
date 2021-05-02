@@ -14,8 +14,8 @@ router.use(bodyParser.json());
 router.use(cookieParser());
 
 router.use(async (req, res, next) => {
-  const digestHex = req.cookies['about_others_digest_hex'];
-  if (digestHex !== process.env.ABOUT_OTHERS_DIGEST_HEX) {
+  const token = req.cookies['token'];
+  if (token !== global.token) {
     res.sendStatus(HttpStatus.UNAUTHORIZED);
   } else {
     next();
