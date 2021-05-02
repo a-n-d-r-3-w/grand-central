@@ -5,7 +5,7 @@ const Quotes = () => {
   const [quotes, setQuotes] = useState([]);
 
   const getQuotes = async () => {
-    const response = await axios.get('/616e64726577/api/quotes');
+    const response = await axios.get('/api/quotes');
     const quotes = response.data;
     setQuotes(quotes);
   };
@@ -17,8 +17,8 @@ const Quotes = () => {
   const onClickAddQuote = async () => {
     const text = window.prompt('Text:');
     if (text && text.trim().length > 0) {
-      await axios.post('/616e64726577/api/quotes', { text });
-      const response = await axios.get('/616e64726577/api/quotes');
+      await axios.post('/api/quotes', { text });
+      const response = await axios.get('/api/quotes');
       const quotes = response.data;
       setQuotes(quotes);
     }
@@ -26,7 +26,7 @@ const Quotes = () => {
 
   const onClickDeleteQuote = async quote => {
     if (window.confirm(`Delete "${quote.text}"?`)) {
-      await axios.delete(`/616e64726577/api/quotes/${quote.quoteId}`);
+      await axios.delete(`/api/quotes/${quote.quoteId}`);
       await getQuotes();
     }
   };

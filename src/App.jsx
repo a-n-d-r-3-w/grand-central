@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Login from './Login';
 import AboutOthers from './AboutOthers';
 import Quotes from './Quotes';
 import './App.css';
@@ -8,10 +9,13 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/616e64726577/about-others">
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/about-others">
           <AboutOthers />
         </Route>
-        <Route path="/616e64726577/quotes">
+        <Route path="/quotes">
           <Quotes />
         </Route>
         <Route path="/">
@@ -23,18 +27,7 @@ const App = () => {
 };
 
 function GrandCentral() {
-  return (
-    <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Grand Central</Link>
-          </li>
-        </ul>
-      </nav>
-      <h1>Grand Central</h1>
-    </>
-  );
+  return <h1>Home</h1>;
 }
 
 export default App;

@@ -8,18 +8,15 @@ const login = require('./routers/login');
 
 const app = express();
 
-app.use(express.static('build'));
+// app.use(express.static('build'));
 app.use('/blog', express.static('blog'));
-app.use('/login', express.static('login'));
 
-app.use('/616e64726577/api/about-others/people', people);
-app.use('/616e64726577/api/quotes', quotes);
-app.use('/616e64726577/api/send-mail', sendMail);
+app.use('/api/about-others/people', people);
+app.use('/api/quotes', quotes);
+app.use('/api/send-mail', sendMail);
 app.use('/api/login', login);
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+app.get('/*', express.static('build'));
 
 let port = process.env.PORT;
 if (port == null || port === '') {

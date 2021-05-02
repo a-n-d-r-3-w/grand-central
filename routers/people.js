@@ -15,7 +15,7 @@ router.use(cookieParser());
 
 router.use(async (req, res, next) => {
   const token = req.cookies['token'];
-  if (token !== global.token) {
+  if (!token || !global.token || token !== global.token) {
     res.sendStatus(HttpStatus.UNAUTHORIZED);
   } else {
     next();

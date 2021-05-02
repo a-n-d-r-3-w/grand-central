@@ -8,7 +8,7 @@ const AboutOthers = () => {
   const [isSynced, setIsSynced] = useState(true);
 
   const getPeople = async () => {
-    const response = await axios.get('/616e64726577/api/about-others/people');
+    const response = await axios.get('/api/about-others/people');
     const people = response.data;
     setPeople(people);
   };
@@ -20,8 +20,8 @@ const AboutOthers = () => {
   const onClickAddPerson = async () => {
     const name = window.prompt('Name:');
     if (name && name.trim().length > 0) {
-      await axios.post('/616e64726577/api/about-others/people', { name });
-      const response = await axios.get('/616e64726577/api/about-others/people');
+      await axios.post('/api/about-others/people', { name });
+      const response = await axios.get('/api/about-others/people');
       const people = response.data;
       setPeople(people);
     }
@@ -30,7 +30,7 @@ const AboutOthers = () => {
   const onClickDeletePerson = async person => {
     if (window.confirm(`Delete ${person.name}?`)) {
       await axios.delete(
-        `/616e64726577/api/about-others/people/${person.personId}`
+        `/api/about-others/people/${person.personId}`
       );
       await getPeople();
     }
@@ -53,7 +53,7 @@ const AboutOthers = () => {
     setSaveTimeoutId(
       window.setTimeout(async () => {
         await axios.put(
-          `/616e64726577/api/about-others/people/${selectedPerson.personId}`,
+          `/api/about-others/people/${selectedPerson.personId}`,
           {
             newNotes
           }
