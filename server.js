@@ -8,7 +8,7 @@ const login = require('./routers/login');
 
 const app = express();
 
-// app.use(express.static('build'));
+app.use(express.static('build'));
 app.use('/blog', express.static('blog'));
 
 app.use('/api/about-others/people', people);
@@ -16,7 +16,9 @@ app.use('/api/quotes', quotes);
 app.use('/api/send-mail', sendMail);
 app.use('/api/login', login);
 
-app.get('/*', express.static('build'));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 let port = process.env.PORT;
 if (port == null || port === '') {

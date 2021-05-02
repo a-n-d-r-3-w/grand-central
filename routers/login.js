@@ -31,7 +31,8 @@ router.post('/', (req, res) => {
   global.token = token;
   res.cookie('token', token, {
     httpOnly: true,
-    sameSite: 'strict'
+    sameSite: 'strict',
+    secure: process.env.NODE_ENV === 'production'
   });
   res.redirect('/about-others');
 });
