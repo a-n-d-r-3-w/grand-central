@@ -26,7 +26,7 @@ const OhLife = () => {
   };
 
   const onClickDeleteEntry = async entry => {
-    if (window.confirm(`Delete ${entry.name}?`)) {
+    if (window.confirm(`Delete ${new Date(Number.parseInt(entry.name)).toDateString()}?`)) {
       await axios.delete(
         `/api/ohlife/entries/${entry.entryId}`
       );
