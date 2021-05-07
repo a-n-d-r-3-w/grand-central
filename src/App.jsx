@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './Login';
 import AboutOthers from './AboutOthers';
+import OhLife from './OhLife';
 import Quotes from './Quotes';
 import './App.css';
 
@@ -14,6 +15,9 @@ const App = () => {
         </Route>
         <Route path="/about-others">
           <AboutOthers />
+        </Route>
+        <Route path="/ohlife">
+          <OhLife />
         </Route>
         <Route path="/quotes">
           <Quotes />
