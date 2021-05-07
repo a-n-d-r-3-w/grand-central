@@ -1,3 +1,4 @@
+const schedule = require('node-schedule');
 const nodemailer = require('nodemailer');
 const { getEntries } = require('./routers/entriesUtils');
 
@@ -19,7 +20,7 @@ const sendEmail = async () => {
         const randomIndex = Math.floor(Math.random() * numEntries);
         const randomEntry = entries[randomIndex];
         const date = new Date(Number.parseInt(randomEntry.name)).toDateString()
-        const text = randomEntry.notes; 
+        const text = 'Hello from https://grandcentral.nfshost.com/login! Do you remember this?\n\n---\n\n' + randomEntry.notes;
         await transporter.sendMail({
             from: process.env.OHLIFE_MAIL_FROM,
             to: process.env.OHLIFE_MAIL_TO,
@@ -29,9 +30,6 @@ const sendEmail = async () => {
     }
 };
 
-const ONE_SECOND = 1000;
-const ONE_MINUTE = 60 * ONE_SECOND;
-const ONE_HOUR = 60 * ONE_MINUTE;
-const ONE_DAY = 24 * ONE_HOUR;
-
-setInterval(sendEmail, ONE_HOUR);
+schedule.scheduleJob('0 18 * * *', function () { // Every day at 6:00 p.m.
+    sendEmail();
+});
