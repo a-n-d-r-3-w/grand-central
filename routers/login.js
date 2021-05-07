@@ -34,7 +34,9 @@ router.post('/', (req, res) => {
     sameSite: 'strict',
     secure: process.env.NODE_ENV === 'production'
   });
-  res.redirect('/about-others');
+
+  const selectedApp = req.body['selected-app'];
+  res.redirect('/' + selectedApp);
 });
 
 module.exports = router;
