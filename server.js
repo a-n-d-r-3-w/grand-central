@@ -6,6 +6,7 @@ const entries = require('./routers/entries');
 const quotes = require('./routers/quotes');
 const sendMail = require('./routers/sendMail');
 const login = require('./routers/login');
+require('./sendDailyEmail');
 
 const app = express();
 
@@ -28,14 +29,3 @@ if (port == null || port === '') {
 }
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
-
-// Disable because of error:
-// "The provided authorization grant is invalid, expired, or revoked"
-// sendEmail();
-
-const ONE_SECOND = 1000;
-const ONE_MINUTE = 60 * ONE_SECOND;
-const ONE_HOUR = 60 * ONE_MINUTE;
-
-// Start quotes email timer
-// setInterval(sendEmail, ONE_HOUR);
