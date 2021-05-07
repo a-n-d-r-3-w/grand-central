@@ -18,7 +18,12 @@ const OhLife = () => {
   }, []);
 
   const onClickAddEntry = async () => {
-    const name = window.prompt('Name:');
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const dateString = year + '.' + ('0' + month).slice(-2) + '.' + ('0' + day).slice(-2);
+    const name = dateString;
     if (name && name.trim().length > 0) {
       await axios.post('/api/ohlife/entries', { name });
       const response = await axios.get('/api/ohlife/entries');
