@@ -99,7 +99,7 @@ const OhLife = () => {
 
   const aboutEntry = selectedEntry && (
     <div className="container mt-3">
-      <h4>About {selectedEntry.name}</h4>
+      <h4>Here's what happened on {new Date(Number.parseInt(selectedEntry.name)).toDateString()}</h4>
       <div>
         <button
           type="button"
