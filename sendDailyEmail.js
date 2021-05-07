@@ -30,6 +30,6 @@ const sendEmail = async () => {
     }
 };
 
-schedule.scheduleJob('0 18 * * *', function () { // Every day at 6:00 p.m.
+schedule.scheduleJob('0 22 * * *', function () { // Every day at 10 p.m. UTC (6 p.m. EST)
     sendEmail();
 });
