@@ -18,18 +18,11 @@ const OhLife = () => {
   }, []);
 
   const onClickAddEntry = async () => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const dateString = year + '.' + ('0' + month).slice(-2) + '.' + ('0' + day).slice(-2);
-    const name = dateString;
-    if (name && name.trim().length > 0) {
-      await axios.post('/api/ohlife/entries', { name });
-      const response = await axios.get('/api/ohlife/entries');
-      const entries = response.data;
-      setEntries(entries);
-    }
+    const name = Date.now().toString();
+    await axios.post('/api/ohlife/entries', { name });
+    const response = await axios.get('/api/ohlife/entries');
+    const entries = response.data;
+    setEntries(entries);
   };
 
   const onClickDeleteEntry = async entry => {
@@ -82,7 +75,7 @@ const OhLife = () => {
               className="btn btn-link px-0 mr-3"
               onClick={() => setSelectedEntry(entry)}
             >
-              {entry.name}
+              {new Date(Number.parseInt(entry.name)).toDateString()}
             </button>
             <button
               type="button"
