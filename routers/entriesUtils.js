@@ -23,18 +23,21 @@ const getEntries = async () => {
 };
 
 const addEntry = async name => {
-  const sql = `INSERT INTO ohlife.entries (entryId, name, notes) VALUES ("${shortid.generate()}", "${name}", "");`;
-  return await connectQueryEnd(sql);
+  const sql = `INSERT INTO ohlife.entries (entryId, name, notes) VALUES (?, ?, "");`;
+  const args = [shortid.generate(), name];
+  return await connectQueryEnd(sql, args);
 };
 
 const updateNotesForEntry = async (entryId, newNotes) => {
-  const sql = `UPDATE ohlife.entries SET notes="${newNotes}" WHERE entryId="${entryId}";`;
-  return await connectQueryEnd(sql);
+  const sql = `UPDATE ohlife.entries SET notes=? WHERE entryId=?;`;
+  const args = [newNotes, entryId];
+  return await connectQueryEnd(sql, args);
 };
 
 const deleteEntry = async entryId => {
-  const sql = `DELETE FROM ohlife.entries WHERE entryId="${entryId}";`;
-  return await connectQueryEnd(sql);
+  const sql = `DELETE FROM ohlife.entries WHERE entryId=?;`;
+  const args = [entryId];
+  return await connectQueryEnd(sql, args);
 };
 
 module.exports = {

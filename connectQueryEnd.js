@@ -16,10 +16,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-module.exports = sql => {
+module.exports = (sql, args) => {
   return pool.getConnection().then(connection => {
     return connection
-      .query(sql)
+      .query(sql, args)
       .catch(error => {
         console.error(error);
       })
