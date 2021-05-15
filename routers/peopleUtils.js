@@ -23,18 +23,21 @@ const getPeople = async () => {
 };
 
 const addPerson = async name => {
-  const sql = `INSERT INTO about_others.people (personId, name, notes) VALUES ("${shortid.generate()}", "${name}", "");`;
-  return await connectQueryEnd(sql);
+  const sql = `INSERT INTO about_others.people (personId, name, notes) VALUES (?, ?, "");`;
+  const args = [shortid.generate(), name];
+  return await connectQueryEnd(sql, args);
 };
 
 const updateNotesForPerson = async (personId, newNotes) => {
-  const sql = `UPDATE about_others.people SET notes="${newNotes}" WHERE personId="${personId}";`;
-  return await connectQueryEnd(sql);
+  const sql = `UPDATE about_others.people SET notes=? WHERE personId=?;`;
+  const args = [newNotes, personId];
+  return await connectQueryEnd(sql, args);
 };
 
 const deletePerson = async personId => {
-  const sql = `DELETE FROM about_others.people WHERE personId="${personId}";`;
-  return await connectQueryEnd(sql);
+  const sql = `DELETE FROM about_others.people WHERE personId=?;`;
+  const args = [personId];
+  return await connectQueryEnd(sql, args);
 };
 
 module.exports = {
