@@ -13,9 +13,7 @@ The application host is [NearlyFreeSpeech.NET](https://www.nearlyfreespeech.net/
 
 ## The blog
 
-[markdown-styles](https://github.com/mixu/markdown-styles) converts blog post files (written in Markdown) into HTML files (to be viewed in web browsers).
-
-[serve-index](https://github.com/expressjs/serve-index) serves the list of HTML blog post files.
+Blog posts are written in Markdown, [markdown-styles](https://github.com/mixu/markdown-styles) converts them into HTML files, and [serve-index](https://github.com/expressjs/serve-index) serves the list of files.
 
 ## The CRUD apps
 
