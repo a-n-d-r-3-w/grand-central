@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const serveIndex = require('serve-index')
 const path = require('path');
 const people = require('./routers/people');
 const entries = require('./routers/entries');
@@ -11,7 +12,11 @@ require('./sendDailyEmail');
 const app = express();
 
 app.use(express.static('build'));
-app.use('/blog', express.static('blog'));
+app.use('/blog', express.static('blog', {
+  setHeaders: res => {
+    res.set('Content-Type', 'text/plain');
+  }
+}), serveIndex('blog', {'icons': true}));
 
 app.use('/api/about-others/people', people);
 app.use('/api/ohlife/entries', entries);
