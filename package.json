@@ -14,6 +14,7 @@
     "express": "^4.17.1",
     "http-status-codes": "^1.4.0",
     "mariadb": "^2.5.3",
+    "markdown-styles": "^3.2.0",
     "mongodb": "^3.6.6",
     "node-schedule": "^2.0.0",
     "nodemailer": "^6.6.0",
@@ -26,9 +27,9 @@
   },
   "scripts": {
     "// Runs client and server in dev mode": "",
-    "dev": "concurrently \"npm:client:dev\" \"npm:server:dev\"",
+    "dev": "concurrently \"npm:client:dev\" \"npm:server:dev\" \"npm:build:blog\"",
     "// Runs client and server in prod mode": "",
-    "start": "concurrently \"npm:client:build\" \"npm:server:start\"",
+    "start": "concurrently \"npm:client:build\" \"npm:server:start\" \"npm:build:blog\"",
     "// Client-specific scripts": "",
     "client:dev": "react-scripts start",
     "client:test": "react-scripts test",
@@ -36,7 +37,9 @@
     "client:eject": "react-scripts eject",
     "// Server-specific scripts": "",
     "server:dev": "nodemon server.js",
-    "server:start": "node server.js"
+    "server:start": "node server.js",
+    "// Convert Markdown blog posts to HTML": "",
+    "build:blog": "generate-md --layout mixu-page --input ./blog-src --output ./blog"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -12,11 +12,7 @@ require('./sendDailyEmail');
 const app = express();
 
 app.use(express.static('build'));
-app.use('/blog', express.static('blog', {
-  setHeaders: res => {
-    res.set('Content-Type', 'text/plain');
-  }
-}), serveIndex('blog', {'icons': true}));
+app.use('/blog', express.static('blog'), serveIndex('blog', {'icons': true}));
 
 app.use('/api/about-others/people', people);
 app.use('/api/ohlife/entries', entries);
