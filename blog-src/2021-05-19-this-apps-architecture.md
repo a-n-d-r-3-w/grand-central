@@ -9,7 +9,7 @@ This app contains:
 
 ## High-level infrastructure
 
-The application host is [NearlyFreeSpeech.NET](https://www.nearlyfreespeech.net/), the runtime is Node.js, and the web server is Express.js.
+The application host is [NearlyFreeSpeech.NET](https://www.nearlyfreespeech.net/), the runtime is [Node.js](https://nodejs.org/en/), and the web server is [Express.js](http://expressjs.com/).
 
 ## The blog
 
