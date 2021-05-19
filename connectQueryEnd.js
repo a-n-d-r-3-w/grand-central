@@ -3,9 +3,9 @@ const mariadb = require('mariadb');
 let pool;
 if (process.env.NODE_ENV === 'production') {
   pool = mariadb.createPool({
-    host: 'grandcentral.db',
-    user: 'about_others',
-    password: '8672E28DF16BF487A',
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASS,
     connectionLimit: 5
   });
 } else {
