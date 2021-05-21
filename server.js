@@ -4,8 +4,6 @@ const serveIndex = require('serve-index')
 const path = require('path');
 const people = require('./routers/people');
 const entries = require('./routers/entries');
-const quotes = require('./routers/quotes');
-const sendMail = require('./routers/sendMail');
 const login = require('./routers/login');
 require('./sendDailyEmail');
 
@@ -21,8 +19,6 @@ app.use('/blog', express.static('blog'), serveIndex('blog', {
 
 app.use('/api/about-others/people', people);
 app.use('/api/ohlife/entries', entries);
-app.use('/api/quotes', quotes);
-app.use('/api/send-mail', sendMail);
 app.use('/api/login', login);
 
 app.get('/*', (req, res) => {
