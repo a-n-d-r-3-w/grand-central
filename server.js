@@ -10,7 +10,18 @@ const login = require('./routers/login');
 require('./sendDailyEmail');
 
 const app = express();
-app.use(helmet());
+
+// Disable app.use(helmet.contentSecurityPolicy()); because it prevents the page from rendering on production builds.
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.expectCt());
+app.use(helmet.frameguard());
+app.use(helmet.hidePoweredBy());
+app.use(helmet.hsts());
+app.use(helmet.ieNoOpen());
+app.use(helmet.noSniff());
+app.use(helmet.permittedCrossDomainPolicies());
+app.use(helmet.referrerPolicy());
+app.use(helmet.xssFilter());
 
 app.use(express.static('build'));
 app.use('/blog', express.static('blog'), serveIndex('blog', {
