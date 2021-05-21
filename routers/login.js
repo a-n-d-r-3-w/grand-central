@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 const HttpStatus = require('http-status-codes');
+const validator = require('validator');
 
 const router = express.Router();
 router.use(express.json()) // for parsing application/json
@@ -14,6 +15,11 @@ router.delete('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  const selectedApp = req.body['selected-app'];
+  if (!validator.isIn(selectedApp, ['about-others', 'ohlife'])) {
+    res.sendStatus(HttpStatus.BAD_REQUEST);
+  }
+
   const password = req.body.password;
   if (!password) {
     res.sendStatus(HttpStatus.FORBIDDEN);
@@ -35,7 +41,6 @@ router.post('/', (req, res) => {
     secure: process.env.NODE_ENV === 'production'
   });
 
-  const selectedApp = req.body['selected-app'];
   res.redirect('/' + selectedApp);
 });
 
