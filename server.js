@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const helmet = require("helmet");
 const serveIndex = require('serve-index')
 const path = require('path');
 const rateLimit = require("express-rate-limit");
@@ -9,6 +10,7 @@ const login = require('./routers/login');
 require('./sendDailyEmail');
 
 const app = express();
+app.use(helmet());
 
 app.use(express.static('build'));
 app.use('/blog', express.static('blog'), serveIndex('blog', {
@@ -24,7 +26,7 @@ app.use('/blog', express.static('blog'), serveIndex('blog', {
 // app.set('trust proxy', 1);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10 // limit each IP to 10 requests per windowMs
+  max: 20 // limit each IP to 20 requests per windowMs
 });
 app.use(limiter);
 
