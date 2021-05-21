@@ -22,11 +22,11 @@ app.use('/blog', express.static('blog'), serveIndex('blog', {
 // Enable 'trust proxy' if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
 // see https://expressjs.com/en/guide/behind-proxies.html
 // app.set('trust proxy', 1);
-const apiLimiter = rateLimit({
+const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10
+  max: 10 // limit each IP to 10 requests per windowMs
 });
-app.use("/api/", apiLimiter);
+app.use(limiter);
 
 app.use('/api/about-others/people', people);
 app.use('/api/ohlife/entries', entries);
