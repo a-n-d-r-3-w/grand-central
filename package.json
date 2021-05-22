@@ -49,7 +49,7 @@
     "server:start": "node server.js",
     "// Convert Markdown blog posts to HTML": "",
     "build:blog": "generate-md --layout mixu-page --input ./blog-src --output ./blog",
-    "build:dependencygraph": "depcruise --exclude '^node_modules' --output-type dot server.js src/index.jsx | dot -T svg > dependencygraph.svg"
+    "build:dependencygraph": "depcruise --do-not-follow '^node_modules' --collapse '^node_modules/[^/]+' --output-type dot server.js src/index.jsx | dot -T svg > dependencygraph.svg"
   },
   "eslintConfig": {
     "extends": "react-app"
