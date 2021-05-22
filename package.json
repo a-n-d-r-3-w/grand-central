@@ -49,7 +49,9 @@
     "server:start": "node server.js",
     "// Convert Markdown blog posts to HTML": "",
     "build:blog": "generate-md --layout mixu-page --input ./blog-src --output ./blog",
-    "build:dependencygraph": "depcruise --do-not-follow '^node_modules' --collapse '^node_modules/[^/]+' --output-type dot server.js src/index.jsx | dot -T svg > dependencygraph.svg"
+    "build:dependencygraph": "depcruise --do-not-follow '^node_modules' --collapse '^node_modules/[^/]+' --output-type dot server.js src/index.jsx | dot -T svg > dependencygraph.svg",
+    "// Install husky": "",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -68,6 +70,7 @@
   },
   "devDependencies": {
     "dependency-cruiser": "^10.0.1",
+    "husky": "^6.0.0",
     "nodemon": "^2.0.7",
     "prettier": "1.19.1"
   },
