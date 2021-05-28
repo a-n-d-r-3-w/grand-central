@@ -72,7 +72,7 @@ const OhLife = () => {
           >
             <button
               type="button"
-              className="btn btn-link px-0 mr-3"
+              className="btn btn-link px-0 me-3"
               onClick={() => setSelectedEntry(entry)}
             >
               {new Date(Number.parseInt(entry.name)).toDateString()}

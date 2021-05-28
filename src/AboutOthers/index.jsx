@@ -74,7 +74,7 @@ const AboutOthers = () => {
           >
             <button
               type="button"
-              className="btn btn-link px-0 mr-3"
+              className="btn btn-link px-0 me-3"
               onClick={() => setSelectedPerson(person)}
             >
               {person.name}
