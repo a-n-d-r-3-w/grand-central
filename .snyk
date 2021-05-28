@@ -29,30 +29,30 @@ ignore:
     - react-scripts > babel-eslint > resolve > path-parse:
         reason: None given
         expires: '2021-06-20T18:38:24.365Z'
-      react-scripts > @babel/core > resolve > path-parse:
-        reason: None given
-        expires: '2021-06-20T18:47:07.395Z'
     - react-scripts > @babel/core > resolve > path-parse:
         reason: None given
         expires: '2021-06-20T18:38:24.365Z'
-      react-scripts > eslint-plugin-react > resolve > path-parse:
+    - react-scripts > eslint-plugin-react > resolve > path-parse:
+        reason: None given
+        expires: '2021-06-20T18:38:24.365Z'
+    - concurrently > read-pkg > normalize-package-data > resolve > path-parse:
+        reason: None given
+        expires: '2021-06-20T18:38:24.365Z'
+    - react-scripts > @svgr/webpack > @babel/preset-env > babel-plugin-polyfill-corejs2 > @babel/helper-define-polyfill-provider > resolve > path-parse:
+        reason: None given
+        expires: '2021-06-20T18:38:24.365Z'
+    - react-scripts > @babel/core > resolve > path-parse:
         reason: None given
         expires: '2021-06-20T18:47:07.395Z'
     - react-scripts > eslint-plugin-react > resolve > path-parse:
         reason: None given
-        expires: '2021-06-20T18:38:24.365Z'
-      concurrently > read-pkg > normalize-package-data > resolve > path-parse:
-        reason: None given
         expires: '2021-06-20T18:47:07.395Z'
     - concurrently > read-pkg > normalize-package-data > resolve > path-parse:
-        reason: None given
-        expires: '2021-06-20T18:38:24.365Z'
-      react-scripts > @svgr/webpack > @babel/preset-env > babel-plugin-polyfill-corejs2 > @babel/helper-define-polyfill-provider > resolve > path-parse:
         reason: None given
         expires: '2021-06-20T18:47:07.395Z'
     - react-scripts > @svgr/webpack > @babel/preset-env > babel-plugin-polyfill-corejs2 > @babel/helper-define-polyfill-provider > resolve > path-parse:
         reason: None given
-        expires: '2021-06-20T18:38:24.365Z'
+        expires: '2021-06-20T18:47:07.395Z'
   SNYK-JS-POSTCSS-1090595:
     - react-scripts > css-loader > postcss:
         reason: None given
@@ -517,4 +517,15 @@ ignore:
     - react-scripts > resolve-url-loader > postcss:
         reason: None given
         expires: '2021-06-20T18:47:07.399Z'
+  SNYK-JS-NORMALIZEURL-1296539:
+    - react-scripts > mini-css-extract-plugin > normalize-url:
+        reason: None given
+        expires: '2021-06-27T01:51:11.666Z'
+    - react-scripts > optimize-css-assets-webpack-plugin > cssnano > cssnano-preset-default > postcss-normalize-url > normalize-url:
+        reason: None given
+        expires: '2021-06-27T01:51:11.666Z'
+  SNYK-JS-WS-1296835:
+    - react-scripts > webpack-dev-server > ws:
+        reason: None given
+        expires: '2021-06-27T01:51:11.667Z'
 patch: {}
