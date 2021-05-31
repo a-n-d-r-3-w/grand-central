@@ -528,4 +528,8 @@ ignore:
     - react-scripts > webpack-dev-server > ws:
         reason: None given
         expires: '2021-06-27T01:51:11.667Z'
+  SNYK-JS-CSSWHAT-1298035:
+    - react-scripts > @svgr/webpack > @svgr/plugin-svgo > svgo > css-select > css-what:
+        reason: None given
+        expires: '2021-06-30T01:21:09.746Z'
 patch: {}
