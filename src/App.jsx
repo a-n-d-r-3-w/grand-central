@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './Login';
+import Auth0Login from './Auth0Login';
 import AboutOthers from './AboutOthers';
 import OhLife from './OhLife';
 
@@ -8,6 +9,9 @@ const App = () => {
   return (
     <Router>
       <Switch>
+      <Route path="/auth0-login">
+          <Auth0Login />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
