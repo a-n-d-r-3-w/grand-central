@@ -8,6 +8,9 @@ const encrypt = (plaintext, encryptionKey, iv = process.env.ENCRYPTION_INITIALIZ
 }
 
 const decrypt = (encryptedText, encryptionKey, iv = process.env.ENCRYPTION_INITIALIZATION_VECTOR) => {
+    if (!encryptedText) {
+        return '';
+    }
     const decipher = crypto.createDecipheriv('aes-256-cbc', encryptionKey, iv);
     let decryptedText = decipher.update(encryptedText, 'hex', 'utf-8');
     decryptedText += decipher.final('utf-8');
