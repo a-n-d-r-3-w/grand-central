@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
 
   const salt = process.env.ENCRYPTION_KEY_SALT;
   const numIterations = 100000;
-  const keyLength = 64;
+  const keyLength = 16;
   const encryptionKey = crypto.pbkdf2Sync(password, salt, numIterations, keyLength, 'sha512').toString('hex');
   res.cookie('encryptionKey', encryptionKey, {
     httpOnly: true,
