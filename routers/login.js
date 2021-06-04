@@ -11,7 +11,9 @@ router.use(cookieParser());
 
 router.delete('/', (req, res) => {
   delete global.token;
-  res.clearCookie('token').end();
+  res.clearCookie('token');
+  res.clearCookie('encryptionKey');
+  res.end();
 });
 
 router.post('/', (req, res) => {
@@ -33,11 +35,22 @@ router.post('/', (req, res) => {
     res.sendStatus(HttpStatus.FORBIDDEN);
     return;
   }
-  const token = crypto.randomBytes(16).toString('hex');
-  global.token = token;
-  res.cookie('token', token, {
+  
+  const sessionToken = crypto.randomBytes(16).toString('hex');
+  global.token = sessionToken;
+  res.cookie('token', sessionToken, {
     httpOnly: true,
-    sameSite: 'strict',
+    sameSite: 'strict', 
+    secure: process.env.NODE_ENV === 'production'
+  });
+
+  const salt = process.env.ENCRYPTION_KEY_SALT;
+  const numIterations = 100000;
+  const keyLength = 64;
+  const encryptionKey = crypto.pbkdf2Sync(password, salt, numIterations, keyLength, 'sha512').toString('hex');
+  res.cookie('encryptionKey', encryptionKey, {
+    httpOnly: true,
+    sameSite: 'strict', 
     secure: process.env.NODE_ENV === 'production'
   });
 
