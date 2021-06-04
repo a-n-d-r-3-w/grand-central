@@ -25,11 +25,11 @@ router.post('/', (req, res) => {
     res.sendStatus(HttpStatus.FORBIDDEN);
     return;
   }
-  const secret = 'crayola';
+  const secret = process.env.GRAND_CENTRAL_PASS_HASH_SECRET;
   const hash = crypto.createHmac('sha256', secret)
     .update(password)
     .digest('hex');
-  if (hash !== '16d5bcfa3137d76ecd9dff459fadff5c8e18bca22226e4582386e19e9da18cbb') {
+  if (hash !== process.env.GRAND_CENTRAL_PASS_DIGEST_HEX) {
     res.sendStatus(HttpStatus.FORBIDDEN);
     return;
   }
