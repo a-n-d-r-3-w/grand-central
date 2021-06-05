@@ -1,10 +1,11 @@
 const shortid = require('shortid');
 const connectQueryEnd = require('../connectQueryEnd');
+const { encrypt, decrypt } = require('../encryptionUtils');
 
-const sortEntries = entries => {
+const sortEntries = (entries, encryptionKey) => {
   entries.sort((entry1, entry2) => {
-    const name1 = entry1.name.toLowerCase();
-    const name2 = entry2.name.toLowerCase();
+    const name1 = decrypt(entry1.name, encryptionKey).toLowerCase();
+    const name2 = decrypt(entry2.name, encryptionKey).toLowerCase();
     if (name1 < name2) {
       return -1;
     }
@@ -15,22 +16,28 @@ const sortEntries = entries => {
   });
 };
 
-const getEntries = async () => {
+const getEntries = async encryptionKey => {
   const sql = `SELECT * FROM ohlife.entries;`;
   const entries = await connectQueryEnd(sql);
-  sortEntries(entries);
-  return entries;
+  sortEntries(entries, encryptionKey);
+  return entries.map(entry => ({
+    entryId: entry.entryId,
+    name: decrypt(entry.name, encryptionKey),
+    notes: decrypt(entry.notes, encryptionKey)
+  }));
 };
 
-const addEntry = async name => {
+const addEntry = async (name, encryptionKey) => {
+  const encryptedName = encrypt(name, encryptionKey);
   const sql = `INSERT INTO ohlife.entries (entryId, name, notes) VALUES (?, ?, "");`;
-  const args = [shortid.generate(), name];
+  const args = [shortid.generate(), encryptedName];
   return await connectQueryEnd(sql, args);
 };
 
-const updateNotesForEntry = async (entryId, newNotes) => {
+const updateNotesForEntry = async (entryId, newNotes, encryptionKey) => {
+  const encryptedNotes = encrypt(newNotes, encryptionKey);
   const sql = `UPDATE ohlife.entries SET notes=? WHERE entryId=?;`;
-  const args = [newNotes, entryId];
+  const args = [encryptedNotes, entryId];
   return await connectQueryEnd(sql, args);
 };
 

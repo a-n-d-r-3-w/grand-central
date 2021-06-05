@@ -70,9 +70,9 @@
   },
   "devDependencies": {
     "dependency-cruiser": "^10.0.1",
+    "husky": "^6.0.0",
     "nodemon": "^2.0.7",
-    "prettier": "1.19.1",
-    "husky": "^6.0.0"
+    "prettier": "1.19.1"
   },
   "prettier": {
     "singleQuote": true

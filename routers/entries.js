@@ -23,18 +23,18 @@ router.use(async (req, res, next) => {
 });
 
 router.post('/', async (req, res) => {
-  await addEntry(req.body.name);
+  await addEntry(req.body.name, req.cookies['encryptionKey']);
   res.sendStatus(HttpStatus.CREATED);
 });
 
 router.get('/', async (req, res) => {
-  const entries = await getEntries();
+  const entries = await getEntries(req.cookies['encryptionKey']);
   res.set('Cache-Control', 'no-store');
   res.status(HttpStatus.OK).send(entries);
 });
 
 router.put('/:entryId', async (req, res) => {
-  await updateNotesForEntry(req.params.entryId, req.body.newNotes);
+  await updateNotesForEntry(req.params.entryId, req.body.newNotes, req.cookies['encryptionKey']);
   res.sendStatus(HttpStatus.NO_CONTENT);
 });
 
