@@ -1,3 +1,7 @@
+/*
+TODO: Fix Jest config so that we can use Create React App's version of jest to run this test.
+*/
+
 const { encrypt, decrypt } = require('./encryptionUtils');
 
 let printableCharacters = '';

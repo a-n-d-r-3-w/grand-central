@@ -51,8 +51,7 @@
     "// Convert Markdown blog posts to HTML": "",
     "build:blog": "generate-md --layout mixu-page --input ./blog-src --output ./blog",
     "build:dependencygraph": "depcruise --do-not-follow '^node_modules' --collapse '^node_modules/[^/]+' --output-type dot server.js src/index.jsx | dot -T svg > dependencygraph.svg",
-    "prepare": "husky install",
-    "test": "jest"
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": "react-app"
