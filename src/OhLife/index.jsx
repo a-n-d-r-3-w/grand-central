@@ -17,6 +17,24 @@ const OhLife = () => {
     getEntries();
   }, []);
 
+  const onClickImport = async () => {
+    const importData = window.prompt('Import data:');
+    if (importData && importData.trim().length > 0) {
+      const entriesToImport = JSON.parse(importData);
+      await Promise.all(
+        entriesToImport.map(async entry => {
+          await axios.post('/api/ohlife/entries', {
+            name: entry.name,
+            notes: entry.notes
+          });
+        })
+      );
+      const response = await axios.get('/api/ohlife/entries');
+      const entries = response.data;
+      setEntries(entries);
+    }
+  }
+
   const onClickAddEntry = async () => {
     const name = Date.now().toString();
     await axios.post('/api/ohlife/entries', { name });
@@ -33,6 +51,14 @@ const OhLife = () => {
       await getEntries();
     }
   };
+
+  const onClickDeleteAll = async () => {
+    const response = window.prompt("Are you sure you want to DELETE ALL? If so, enter 'YES'.");
+    if (response === 'YES') {
+      await axios.delete('/api/ohlife/entries');
+      await getEntries();
+    }
+  }
 
   const onClickBack = async () => {
     await getEntries();
@@ -87,13 +113,29 @@ const OhLife = () => {
           </li>
         ))}
       </ul>
-      <button
-        type="button"
-        className="btn btn-primary my-3"
-        onClick={onClickAddEntry}
-      >
-        Add entry
-      </button>
+      <div className="btn-group" role="group" aria-label="Button group">
+        <button
+          type="button"
+          className="btn btn-outline-primary my-3"
+          onClick={onClickAddEntry}
+        >
+          Add entry
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-primary my-3"
+          onClick={onClickImport}
+        >
+          Import
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-primary my-3"
+          onClick={onClickDeleteAll}
+        >
+          Delete all
+        </button>
+      </div>
     </div>
   );
 

@@ -27,10 +27,11 @@ const getEntries = async encryptionKey => {
   }));
 };
 
-const addEntry = async (name, encryptionKey) => {
+const addEntry = async (name, notes = '', encryptionKey) => {
   const encryptedName = encrypt(name, encryptionKey);
-  const sql = `INSERT INTO ohlife.entries (entryId, name, notes) VALUES (?, ?, "");`;
-  const args = [shortid.generate(), encryptedName];
+  const encryptedNotes = encrypt(notes, encryptionKey);
+  const sql = `INSERT INTO ohlife.entries (entryId, name, notes) VALUES (?, ?, ?);`;
+  const args = [shortid.generate(), encryptedName, encryptedNotes];
   return await connectQueryEnd(sql, args);
 };
 

@@ -115,7 +115,7 @@ const AboutOthers = () => {
           </li>
         ))}
       </ul>
-      <div class="btn-group" role="group" aria-label="Button group">
+      <div className="btn-group" role="group" aria-label="Button group">
         <button
           type="button"
           className="btn btn-outline-primary my-3"

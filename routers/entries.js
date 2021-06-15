@@ -23,7 +23,7 @@ router.use(async (req, res, next) => {
 });
 
 router.post('/', async (req, res) => {
-  await addEntry(req.body.name, req.cookies['encryptionKey']);
+  await addEntry(req.body.name, req.body.notes, req.cookies['encryptionKey']);
   res.sendStatus(HttpStatus.CREATED);
 });
 
@@ -42,5 +42,15 @@ router.delete('/:entryId', async (req, res) => {
   await deleteEntry(req.params.entryId);
   res.sendStatus(HttpStatus.NO_CONTENT);
 });
+
+router.delete('/', async (req, res) => {
+  const entries = await getEntries(req.cookies['encryptionKey']);
+  await Promise.all(
+    entries.map(async entry => {
+      await deleteEntry(entry.entryId);
+    })
+  );
+  res.sendStatus(HttpStatus.NO_CONTENT);
+})
 
 module.exports = router;
