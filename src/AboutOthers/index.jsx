@@ -17,6 +17,24 @@ const AboutOthers = () => {
     getPeople();
   }, []);
 
+  const onClickImport = async () => {
+    const importData = window.prompt('Import data:');
+    if (importData && importData.trim().length > 0) {
+      const peopleToImport = JSON.parse(importData);
+      await Promise.all(
+        peopleToImport.map(async person => {
+          await axios.post('/api/about-others/people', {
+            name: person.name,
+            notes: person.notes
+          });
+        })
+      );
+      const response = await axios.get('/api/about-others/people');
+      const people = response.data;
+      setPeople(people);
+    }
+  }
+
   const onClickAddPerson = async () => {
     const name = window.prompt('Name:');
     if (name && name.trim().length > 0) {
@@ -35,6 +53,14 @@ const AboutOthers = () => {
       await getPeople();
     }
   };
+
+  const onClickDeleteAll = async () => {
+    const response = window.prompt("Are you sure you want to DELETE ALL? If so, enter 'YES'.");
+    if (response === 'YES') {
+      await axios.delete('/api/about-others/people');
+      await getPeople();
+    }
+  }
 
   const onClickBack = async () => {
     await getPeople();
@@ -89,13 +115,29 @@ const AboutOthers = () => {
           </li>
         ))}
       </ul>
-      <button
-        type="button"
-        className="btn btn-primary my-3"
-        onClick={onClickAddPerson}
-      >
-        Add person
-      </button>
+      <div class="btn-group" role="group" aria-label="Button group">
+        <button
+          type="button"
+          className="btn btn-outline-primary my-3"
+          onClick={onClickAddPerson}
+        >
+          Add person
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-primary my-3"
+          onClick={onClickImport}
+        >
+          Import
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-primary my-3"
+          onClick={onClickDeleteAll}
+        >
+          Delete all
+        </button>
+      </div>
     </div>
   );
 

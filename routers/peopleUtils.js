@@ -27,10 +27,11 @@ const getPeople = async encryptionKey => {
   }));
 };
 
-const addPerson = async (name, encryptionKey) => {
+const addPerson = async (name, notes = '', encryptionKey) => {
   const encryptedName = encrypt(name, encryptionKey);
-  const sql = `INSERT INTO about_others.people (personId, name, notes) VALUES (?, ?, "");`;
-  const args = [shortid.generate(), encryptedName];
+  const encryptedNotes = encrypt(notes, encryptionKey);
+  const sql = `INSERT INTO about_others.people (personId, name, notes) VALUES (?, ?, ?);`;
+  const args = [shortid.generate(), encryptedName, encryptedNotes];
   return await connectQueryEnd(sql, args);
 };
 

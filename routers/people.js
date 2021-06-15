@@ -23,7 +23,7 @@ router.use(async (req, res, next) => {
 });
 
 router.post('/', async (req, res) => {
-  await addPerson(req.body.name, req.cookies['encryptionKey']);
+  await addPerson(req.body.name, req.body.notes, req.cookies['encryptionKey']);
   res.sendStatus(HttpStatus.CREATED);
 });
 
@@ -40,6 +40,16 @@ router.put('/:personId', async (req, res) => {
 
 router.delete('/:personId', async (req, res) => {
   await deletePerson(req.params.personId);
+  res.sendStatus(HttpStatus.NO_CONTENT);
+});
+
+router.delete('/', async (req, res) => {
+  const people = await getPeople(req.cookies['encryptionKey']);
+  await Promise.all(
+    people.map(async person => {
+      await deletePerson(person.personId);
+    })
+  );
   res.sendStatus(HttpStatus.NO_CONTENT);
 });
 
