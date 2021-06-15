@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = async () => {
-    const entries = await getEntries();
+    const entries = await getEntries(process.env.ENCRYPTION_KEY_FOR_SENDING_EMAILS);
     const numEntries = entries.length;
     if (numEntries > 0) {
         const randomIndex = Math.floor(Math.random() * numEntries);
