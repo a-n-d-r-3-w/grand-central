@@ -107,6 +107,13 @@ const AboutOthers = () => {
             </button>
             <button
               type="button"
+              className="btn btn-outline-secondary btn-sm me-2"
+              onClick={() => onClickDeletePerson(person)}
+            >
+              Rename
+            </button>
+            <button
+              type="button"
               className="btn btn-outline-danger btn-sm"
               onClick={() => onClickDeletePerson(person)}
             >
@@ -115,29 +122,27 @@ const AboutOthers = () => {
           </li>
         ))}
       </ul>
-      <div className="btn-group" role="group" aria-label="Button group">
-        <button
-          type="button"
-          className="btn btn-outline-primary my-3"
-          onClick={onClickAddPerson}
-        >
-          Add person
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-primary my-3"
-          onClick={onClickImport}
-        >
-          Import
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-primary my-3"
-          onClick={onClickDeleteAll}
-        >
-          Delete all
-        </button>
-      </div>
+      <button
+        type="button"
+        className="btn btn-primary my-3 me-2"
+        onClick={onClickAddPerson}
+      >
+        Add person
+      </button>
+      <button
+        type="button"
+        className="btn btn-secondary my-3 me-2"
+        onClick={onClickImport}
+      >
+        Import
+      </button>
+      <button
+        type="button"
+        className="btn btn-danger my-3"
+        onClick={onClickDeleteAll}
+      >
+        Delete all
+      </button>
     </div>
   );
 
