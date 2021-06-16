@@ -42,6 +42,13 @@ const updateNotesForPerson = async (personId, newNotes, encryptionKey) => {
   return await connectQueryEnd(sql, args);
 };
 
+const updateNameForPerson = async (personId, newName, encryptionKey) => {
+  const encryptedName = encrypt(newName, encryptionKey);
+  const sql = `UPDATE about_others.people SET name=? WHERE personId=?;`;
+  const args = [encryptedName, personId];
+  return await connectQueryEnd(sql, args);
+};
+
 const deletePerson = async personId => {
   const sql = `DELETE FROM about_others.people WHERE personId=?;`;
   const args = [personId];
@@ -52,5 +59,6 @@ module.exports = {
   addPerson,
   getPeople,
   updateNotesForPerson,
+  updateNameForPerson,
   deletePerson
 };

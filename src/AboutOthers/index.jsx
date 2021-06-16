@@ -45,6 +45,21 @@ const AboutOthers = () => {
     }
   };
 
+  const onClickRenamePerson = async person => {
+    const newName = window.prompt('New name:');
+    if (newName && newName.trim().length > 0) {
+      await axios.put(
+        `/api/about-others/people/${person.personId}/name`,
+        {
+          newName
+        }
+      );
+      const response = await axios.get('/api/about-others/people');
+      const people = response.data;
+      setPeople(people);
+    }
+  }
+
   const onClickDeletePerson = async person => {
     if (window.confirm(`Delete ${person.name}?`)) {
       await axios.delete(
@@ -79,7 +94,7 @@ const AboutOthers = () => {
     setSaveTimeoutId(
       window.setTimeout(async () => {
         await axios.put(
-          `/api/about-others/people/${selectedPerson.personId}`,
+          `/api/about-others/people/${selectedPerson.personId}/notes`,
           {
             newNotes
           }
@@ -108,7 +123,7 @@ const AboutOthers = () => {
             <button
               type="button"
               className="btn btn-outline-secondary btn-sm me-2"
-              onClick={() => onClickDeletePerson(person)}
+              onClick={() => onClickRenamePerson(person)}
             >
               Rename
             </button>

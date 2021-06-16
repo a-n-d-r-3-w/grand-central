@@ -6,6 +6,7 @@ const {
   addPerson,
   getPeople,
   updateNotesForPerson,
+  updateNameForPerson,
   deletePerson
 } = require('./peopleUtils');
 
@@ -33,8 +34,13 @@ router.get('/', async (req, res) => {
   res.status(HttpStatus.OK).send(people);
 });
 
-router.put('/:personId', async (req, res) => {
+router.put('/:personId/notes', async (req, res) => {
   await updateNotesForPerson(req.params.personId, req.body.newNotes, req.cookies['encryptionKey']);
+  res.sendStatus(HttpStatus.NO_CONTENT);
+});
+
+router.put('/:personId/name', async (req, res) => {
+  await updateNameForPerson(req.params.personId, req.body.newName, req.cookies['encryptionKey']);
   res.sendStatus(HttpStatus.NO_CONTENT);
 });
 
