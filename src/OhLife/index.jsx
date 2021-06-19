@@ -101,7 +101,7 @@ const OhLife = () => {
               className="btn btn-link px-0 me-3"
               onClick={() => setSelectedEntry(entry)}
             >
-              {new Date(Number.parseInt(entry.name)).toDateString()}
+              {new Date(Number.parseInt(entry.name)).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(',')[0]}
             </button>
             <button
               type="button"
