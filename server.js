@@ -1,11 +1,12 @@
 require('dotenv').config();
 const express = require('express');
-const helmet = require("helmet");
-const serveIndex = require('serve-index')
+const helmet = require('helmet');
+const serveIndex = require('serve-index');
 const path = require('path');
-const rateLimit = require("express-rate-limit");
+const rateLimit = require('express-rate-limit');
 const people = require('./routers/people');
 const entries = require('./routers/entries');
+const habits = require('./routers/habits');
 const login = require('./routers/login');
 require('./sendDailyEmail');
 
@@ -24,12 +25,16 @@ app.use(helmet.referrerPolicy());
 app.use(helmet.xssFilter());
 
 app.use(express.static('build'));
-app.use('/blog', express.static('blog'), serveIndex('blog', {
-  filter: (filename, index, files, dir) => {
-    return dir.slice(-6) === '/blog/' && filename.slice(-5) === '.html';
-  },
-  icons: true
-}));
+app.use(
+  '/blog',
+  express.static('blog'),
+  serveIndex('blog', {
+    filter: (filename, index, files, dir) => {
+      return dir.slice(-6) === '/blog/' && filename.slice(-5) === '.html';
+    },
+    icons: true
+  })
+);
 
 // Rate limiter
 // Enable 'trust proxy' if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
@@ -43,6 +48,7 @@ app.use(limiter);
 
 app.use('/api/about-others/people', people);
 app.use('/api/ohlife/entries', entries);
+app.use('/api/good-habits/habits', habits);
 app.use('/api/login', login);
 
 app.get('/*', (req, res) => {

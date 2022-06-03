@@ -25,16 +25,53 @@ const Login = () => {
           <form action="/api/login" method="post">
             <div className="mb-3">
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="selected-app" id="about-others-radio" value="about-others" defaultChecked />
-                <label className="form-check-label" htmlFor="about-others-radio">About Others</label>
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="selected-app"
+                  id="good-habits-radio"
+                  value="good-habits"
+                  defaultChecked
+                />
+                <label className="form-check-label" htmlFor="good-habits-radio">
+                  Good Habits
+                </label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="selected-app" id="ohlife-radio" value="ohlife" />
-                <label className="form-check-label" htmlFor="ohlife-radio">OhLife</label>
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="selected-app"
+                  id="about-others-radio"
+                  value="about-others"
+                />
+                <label
+                  className="form-check-label"
+                  htmlFor="about-others-radio"
+                >
+                  About Others
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="selected-app"
+                  id="ohlife-radio"
+                  value="ohlife"
+                />
+                <label className="form-check-label" htmlFor="ohlife-radio">
+                  OhLife
+                </label>
               </div>
             </div>
             <div className="mb-3">
-              <input type="password" name="password" className="form-control" placeholder="Enter password" />
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                placeholder="Enter password"
+              />
             </div>
             <button className="btn btn-primary">Log in</button>
           </form>
@@ -43,6 +80,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

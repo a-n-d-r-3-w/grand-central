@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './Login';
 import AboutOthers from './AboutOthers';
 import OhLife from './OhLife';
+import GoodHabits from './GoodHabits';
 
 const App = () => {
   return (
@@ -16,6 +17,9 @@ const App = () => {
         </Route>
         <Route path="/ohlife">
           <OhLife />
+        </Route>
+        <Route path="/good-habits">
+          <GoodHabits />
         </Route>
         <Route path="/">
           <GrandCentral />
