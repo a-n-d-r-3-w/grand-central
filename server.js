@@ -9,6 +9,7 @@ const entries = require('./routers/entries');
 const habits = require('./routers/habits');
 const login = require('./routers/login');
 require('./sendDailyEmail');
+require('./updateHabitsRecordsNightly');
 
 const app = express();
 
