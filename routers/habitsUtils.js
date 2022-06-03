@@ -8,8 +8,8 @@ const getHabits = async () => {
 };
 
 const addHabit = async description => {
-  const sql = `INSERT INTO good_habits.habits (habitId, description) VALUES (?, ?);`;
-  const args = [shortid.generate(), description];
+  const sql = `INSERT INTO good_habits.habits (habitId, description, record) VALUES (?, ?, ?);`;
+  const args = [shortid.generate(), description, '?'];
   return await connectQueryEnd(sql, args);
 };
 

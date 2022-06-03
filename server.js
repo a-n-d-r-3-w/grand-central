@@ -41,8 +41,8 @@ app.use(
 // see https://expressjs.com/en/guide/behind-proxies.html
 // app.set('trust proxy', 1);
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to `max` requests per `windowMs`
+  windowMs: 60 * 1000, // 1 minute
+  max: 60 // limit each IP to `max` requests per `windowMs`
 });
 app.use(limiter);
 

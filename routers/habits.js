@@ -33,7 +33,7 @@ router.get('/', async (_, res) => {
   res.status(HttpStatus.OK).send(entries);
 });
 
-router.put('/:habitId', async (req, res) => {
+router.put('/:habitId/record', async (req, res) => {
   await updateRecordForHabit(req.params.habitId, req.body.newRecord);
   res.sendStatus(HttpStatus.NO_CONTENT);
 });

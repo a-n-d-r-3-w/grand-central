@@ -31,6 +31,28 @@ const GoodHabits = () => {
     }
   };
 
+  const onClickDoneToday = async habit => {
+    const oldRecord = habit.record;
+    const newRecord = oldRecord.slice(0, oldRecord.length - 1) + 'y';
+    await axios.put(`/api/good-habits/habits/${habit.habitId}/record`, {
+      newRecord
+    });
+    const response = await axios.get('/api/good-habits/habits');
+    const habits = response.data;
+    setHabits(habits);
+  };
+
+  const onClickNotDoneToday = async habit => {
+    const oldRecord = habit.record;
+    const newRecord = oldRecord.slice(0, oldRecord.length - 1) + '?';
+    await axios.put(`/api/good-habits/habits/${habit.habitId}/record`, {
+      newRecord
+    });
+    const response = await axios.get('/api/good-habits/habits');
+    const habits = response.data;
+    setHabits(habits);
+  };
+
   return (
     <div className="container mt-3">
       <h4>Good Habits</h4>
@@ -40,17 +62,19 @@ const GoodHabits = () => {
           return (
             <li className="list-group-item list-group-item-action">
               <div>{habit.description}</div>
-              <div className="my-2">✅✅⭕✅✅✅✅❓</div>
+              <div className="my-2">{habit.record}</div>
               <div>
                 <button
                   type="button"
                   className="btn btn-outline-primary btn-sm me-2"
+                  onClick={() => onClickDoneToday(habit)}
                 >
                   Done today
                 </button>
                 <button
                   type="button"
                   className="btn btn-outline-primary btn-sm me-2"
+                  onClick={() => onClickNotDoneToday(habit)}
                 >
                   Not done today
                 </button>
