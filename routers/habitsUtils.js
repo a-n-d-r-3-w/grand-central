@@ -19,6 +19,12 @@ const updateRecordForHabit = async (habitId, newRecord) => {
   return await connectQueryEnd(sql, args);
 };
 
+const updateDescriptionForHabit = async (habitId, newDescription) => {
+  const sql = `UPDATE good_habits.habits SET description=? WHERE habitId=?`;
+  const args = [newDescription, habitId];
+  return await connectQueryEnd(sql, args);
+};
+
 const deleteHabit = async habitId => {
   const sql = `DELETE FROM good_habits.habits WHERE habitId=?`;
   const args = [habitId];
@@ -29,5 +35,6 @@ module.exports = {
   addHabit,
   getHabits,
   updateRecordForHabit,
+  updateDescriptionForHabit,
   deleteHabit
 };

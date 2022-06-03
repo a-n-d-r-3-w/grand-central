@@ -6,6 +6,7 @@ const {
   addHabit,
   getHabits,
   updateRecordForHabit,
+  updateDescriptionForHabit,
   deleteHabit
 } = require('./habitsUtils');
 
@@ -35,6 +36,11 @@ router.get('/', async (_, res) => {
 
 router.put('/:habitId/record', async (req, res) => {
   await updateRecordForHabit(req.params.habitId, req.body.newRecord);
+  res.sendStatus(HttpStatus.NO_CONTENT);
+});
+
+router.put('/:habitId/description', async (req, res) => {
+  await updateDescriptionForHabit(req.params.habitId, req.body.newDescription);
   res.sendStatus(HttpStatus.NO_CONTENT);
 });
 

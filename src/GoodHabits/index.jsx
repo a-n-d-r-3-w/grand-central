@@ -53,6 +53,18 @@ const GoodHabits = () => {
     setHabits(habits);
   };
 
+  const onClickEdit = async habit => {
+    const newDescription = window.prompt('New description:');
+    if (newDescription && newDescription.trim().length > 0) {
+      await axios.put(`/api/good-habits/habits/${habit.habitId}/description`, {
+        newDescription
+      });
+      const response = await axios.get('/api/good-habits/habits');
+      const habits = response.data;
+      setHabits(habits);
+    }
+  };
+
   return (
     <div className="container mt-3">
       <h4>Good Habits</h4>
@@ -81,8 +93,9 @@ const GoodHabits = () => {
                 <button
                   type="button"
                   className="btn btn-outline-secondary btn-sm me-2"
+                  onClick={() => onClickEdit(habit)}
                 >
-                  Rename
+                  Edit
                 </button>
                 <button
                   type="button"
