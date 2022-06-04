@@ -77,7 +77,9 @@ const GoodHabits = () => {
               key={habit.habitId}
             >
               <div>{habit.description}</div>
-              <div className="my-2">{habit.record}</div>
+              <div className="my-2">
+                {habit.record.replaceAll('y', '✅').replaceAll('?', '☯️')}
+              </div>
               <div>
                 <button
                   type="button"
