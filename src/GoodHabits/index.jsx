@@ -68,7 +68,6 @@ const GoodHabits = () => {
   return (
     <div className="container mt-3">
       <h4>Good Habits</h4>
-      Check the box if the item was done today.
       <ul className="list-group list-group-flush">
         {habits.map(habit => {
           return (
