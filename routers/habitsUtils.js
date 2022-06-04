@@ -1,9 +1,24 @@
 const shortid = require('shortid');
 const connectQueryEnd = require('../connectQueryEnd');
 
+const sortHabits = habits => {
+  habits.sort((habit1, habit2) => {
+    const description1 = habit1.description;
+    const description2 = habit2.description;
+    if (description1 < description2) {
+      return -1;
+    }
+    if (description1 > description2) {
+      return 1;
+    }
+    return 0;
+  });
+};
+
 const getHabits = async () => {
   const sql = `SELECT * FROM good_habits.habits;`;
   const habits = await connectQueryEnd(sql);
+  sortHabits(habits);
   return habits;
 };
 

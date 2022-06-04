@@ -72,7 +72,10 @@ const GoodHabits = () => {
       <ul className="list-group list-group-flush">
         {habits.map(habit => {
           return (
-            <li className="list-group-item list-group-item-action">
+            <li
+              className="list-group-item list-group-item-action"
+              key={habit.habitId}
+            >
               <div>{habit.description}</div>
               <div className="my-2">{habit.record}</div>
               <div>
@@ -81,14 +84,14 @@ const GoodHabits = () => {
                   className="btn btn-outline-primary btn-sm me-2"
                   onClick={() => onClickDoneToday(habit)}
                 >
-                  Done today
+                  Done
                 </button>
                 <button
                   type="button"
-                  className="btn btn-outline-primary btn-sm me-2"
+                  className="btn btn-outline-secondary btn-sm me-2"
                   onClick={() => onClickNotDoneToday(habit)}
                 >
-                  Not done today
+                  Not done
                 </button>
                 <button
                   type="button"
