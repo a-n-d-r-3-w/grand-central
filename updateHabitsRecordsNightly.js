@@ -6,7 +6,7 @@ const updateRecords = async () => {
   Promise.all(
     habits.map(habit => {
       const oldRecord = habit.record;
-      const newRecord = oldRecord + '?';
+      const newRecord = (oldRecord + '?').slice(-14); // Keep two week's worth of data.
       return updateRecordForHabit(habit.habitId, newRecord);
     })
   );
