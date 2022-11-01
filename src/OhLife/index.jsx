@@ -33,7 +33,7 @@ const OhLife = () => {
       const entries = response.data;
       setEntries(entries);
     }
-  }
+  };
 
   const onClickAddEntry = async () => {
     const name = Date.now().toString();
@@ -44,21 +44,25 @@ const OhLife = () => {
   };
 
   const onClickDeleteEntry = async entry => {
-    if (window.confirm(`Delete ${new Date(Number.parseInt(entry.name)).toDateString()}?`)) {
-      await axios.delete(
-        `/api/ohlife/entries/${entry.entryId}`
-      );
+    if (
+      window.confirm(
+        `Delete ${new Date(Number.parseInt(entry.name)).toDateString()}?`
+      )
+    ) {
+      await axios.delete(`/api/ohlife/entries/${entry.entryId}`);
       await getEntries();
     }
   };
 
   const onClickDeleteAll = async () => {
-    const response = window.prompt("Are you sure you want to DELETE ALL? If so, enter 'YES'.");
+    const response = window.prompt(
+      "Are you sure you want to DELETE ALL? If so, enter 'YES'."
+    );
     if (response === 'YES') {
       await axios.delete('/api/ohlife/entries');
       await getEntries();
     }
-  }
+  };
 
   const onClickBack = async () => {
     await getEntries();
@@ -76,20 +80,17 @@ const OhLife = () => {
     setSelectedEntry(updatedEntry);
     setSaveTimeoutId(
       window.setTimeout(async () => {
-        await axios.put(
-          `/api/ohlife/entries/${selectedEntry.entryId}`,
-          {
-            newNotes
-          }
-        );
+        await axios.put(`/api/ohlife/entries/${selectedEntry.entryId}`, {
+          newNotes
+        });
         setIsSynced(true);
       }, 1000)
     );
   };
 
   const ohLife = (
-    <div className="container mt-3">
-      <h4>OhLife</h4>
+    <main className="container mt-3">
+      <h1>OhLife</h1>
       <ul className="list-group list-group-flush">
         {entries.map(entry => (
           <li
@@ -101,7 +102,11 @@ const OhLife = () => {
               className="btn btn-link px-0 me-3"
               onClick={() => setSelectedEntry(entry)}
             >
-              {new Date(Number.parseInt(entry.name)).toLocaleString('en-US', { timeZone: 'America/New_York' }).split(',')[0]}
+              {
+                new Date(Number.parseInt(entry.name))
+                  .toLocaleString('en-US', { timeZone: 'America/New_York' })
+                  .split(',')[0]
+              }
             </button>
             <button
               type="button"
@@ -136,12 +141,15 @@ const OhLife = () => {
           Delete all
         </button>
       </div>
-    </div>
+    </main>
   );
 
   const aboutEntry = selectedEntry && (
     <div className="container mt-3">
-      <h4>Here's what happened on {new Date(Number.parseInt(selectedEntry.name)).toDateString()}</h4>
+      <h4>
+        Here's what happened on{' '}
+        {new Date(Number.parseInt(selectedEntry.name)).toDateString()}
+      </h4>
       <div>
         <button
           type="button"

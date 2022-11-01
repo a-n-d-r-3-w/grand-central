@@ -66,8 +66,8 @@ const GoodHabits = () => {
   };
 
   return (
-    <div className="container mt-3">
-      <h4>Good Habits</h4>
+    <main className="container mt-3">
+      <h1>Good Habits</h1>
       <ul className="list-group list-group-flush">
         {habits.map(habit => {
           return (
@@ -120,7 +120,7 @@ const GoodHabits = () => {
       >
         Add habit
       </button>
-    </div>
+    </main>
   );
 };
 

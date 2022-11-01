@@ -11,7 +11,7 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="container">
+    <main className="container">
       <div className="row">
         <div className="col-sm"></div>
         <div className="col-sm">
@@ -78,7 +78,7 @@ const Login = () => {
         </div>
         <div className="col-sm"></div>
       </div>
-    </div>
+    </main>
   );
 };
 

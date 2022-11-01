@@ -33,7 +33,7 @@ const AboutOthers = () => {
       const people = response.data;
       setPeople(people);
     }
-  }
+  };
 
   const onClickAddPerson = async () => {
     const name = window.prompt('Name:');
@@ -48,34 +48,31 @@ const AboutOthers = () => {
   const onClickRenamePerson = async person => {
     const newName = window.prompt('New name:');
     if (newName && newName.trim().length > 0) {
-      await axios.put(
-        `/api/about-others/people/${person.personId}/name`,
-        {
-          newName
-        }
-      );
+      await axios.put(`/api/about-others/people/${person.personId}/name`, {
+        newName
+      });
       const response = await axios.get('/api/about-others/people');
       const people = response.data;
       setPeople(people);
     }
-  }
+  };
 
   const onClickDeletePerson = async person => {
     if (window.confirm(`Delete ${person.name}?`)) {
-      await axios.delete(
-        `/api/about-others/people/${person.personId}`
-      );
+      await axios.delete(`/api/about-others/people/${person.personId}`);
       await getPeople();
     }
   };
 
   const onClickDeleteAll = async () => {
-    const response = window.prompt("Are you sure you want to DELETE ALL? If so, enter 'YES'.");
+    const response = window.prompt(
+      "Are you sure you want to DELETE ALL? If so, enter 'YES'."
+    );
     if (response === 'YES') {
       await axios.delete('/api/about-others/people');
       await getPeople();
     }
-  }
+  };
 
   const onClickBack = async () => {
     await getPeople();
@@ -105,8 +102,8 @@ const AboutOthers = () => {
   };
 
   const aboutOthers = (
-    <div className="container mt-3">
-      <h4>About Others</h4>
+    <main className="container mt-3">
+      <h1>About Others</h1>
       <ul className="list-group list-group-flush">
         {people.map(person => (
           <li
@@ -158,7 +155,7 @@ const AboutOthers = () => {
       >
         Delete all
       </button>
-    </div>
+    </main>
   );
 
   const aboutPerson = selectedPerson && (
