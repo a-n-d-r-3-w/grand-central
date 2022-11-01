@@ -5,7 +5,7 @@ const OhLife = () => {
   const [entries, setEntries] = useState([]);
   const [selectedEntry, setSelectedEntry] = useState(null);
   const [saveTimeoutId, setSaveTimeoutId] = useState(null);
-  const [isSynced, setIsSynced] = useState(true);
+  const [isSaved, setIsSaved] = useState(true);
 
   const getEntries = async () => {
     const response = await axios.get('/api/ohlife/entries');
@@ -70,7 +70,7 @@ const OhLife = () => {
   };
 
   const onChangeNotes = async event => {
-    setIsSynced(false);
+    setIsSaved(false);
     if (saveTimeoutId) {
       window.clearTimeout(saveTimeoutId);
     }
@@ -83,7 +83,7 @@ const OhLife = () => {
         await axios.put(`/api/ohlife/entries/${selectedEntry.entryId}`, {
           newNotes
         });
-        setIsSynced(true);
+        setIsSaved(true);
       }, 1000)
     );
   };
@@ -145,11 +145,11 @@ const OhLife = () => {
   );
 
   const aboutEntry = selectedEntry && (
-    <div className="container mt-3">
-      <h4>
+    <main className="container mt-3">
+      <h1>
         Here's what happened on{' '}
         {new Date(Number.parseInt(selectedEntry.name)).toDateString()}
-      </h4>
+      </h1>
       <div>
         <button
           type="button"
@@ -158,25 +158,27 @@ const OhLife = () => {
         >
           Back
         </button>{' '}
-        {isSynced ? (
+        {isSaved ? (
           <div className="alert alert-success small" role="alert">
-            Synced
+            Saved
           </div>
         ) : (
           <div className="alert alert-info small" role="alert">
-            Syncing...
+            Saving...
           </div>
         )}
       </div>
       <div className="form-group">
+        <label for="entry">Entry:</label>
         <textarea
+          id="entry"
           className="form-control"
           value={selectedEntry.notes}
           onChange={onChangeNotes}
           rows="10"
         />
       </div>
-    </div>
+    </main>
   );
 
   return selectedEntry ? aboutEntry : ohLife;

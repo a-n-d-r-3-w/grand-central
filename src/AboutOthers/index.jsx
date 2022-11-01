@@ -5,7 +5,7 @@ const AboutOthers = () => {
   const [people, setPeople] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [saveTimeoutId, setSaveTimeoutId] = useState(null);
-  const [isSynced, setIsSynced] = useState(true);
+  const [isSaved, setIsSaved] = useState(true);
 
   const getPeople = async () => {
     const response = await axios.get('/api/about-others/people');
@@ -80,7 +80,7 @@ const AboutOthers = () => {
   };
 
   const onChangeNotes = async event => {
-    setIsSynced(false);
+    setIsSaved(false);
     if (saveTimeoutId) {
       window.clearTimeout(saveTimeoutId);
     }
@@ -96,7 +96,7 @@ const AboutOthers = () => {
             newNotes
           }
         );
-        setIsSynced(true);
+        setIsSaved(true);
       }, 1000)
     );
   };
@@ -159,8 +159,8 @@ const AboutOthers = () => {
   );
 
   const aboutPerson = selectedPerson && (
-    <div className="container mt-3">
-      <h4>About {selectedPerson.name}</h4>
+    <main className="container mt-3">
+      <h1>About {selectedPerson.name}</h1>
       <div>
         <button
           type="button"
@@ -169,25 +169,27 @@ const AboutOthers = () => {
         >
           Back
         </button>{' '}
-        {isSynced ? (
+        {isSaved ? (
           <div className="alert alert-success small" role="alert">
-            Synced
+            Saved
           </div>
         ) : (
           <div className="alert alert-info small" role="alert">
-            Syncing...
+            Saving...
           </div>
         )}
       </div>
       <div className="form-group">
+        <label for="entry">Entry:</label>
         <textarea
+          id="entry"
           className="form-control"
           value={selectedPerson.notes}
           onChange={onChangeNotes}
           rows="10"
         />
       </div>
-    </div>
+    </main>
   );
 
   return selectedPerson ? aboutPerson : aboutOthers;
