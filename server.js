@@ -8,6 +8,7 @@ const people = require('./routers/people');
 const entries = require('./routers/entries');
 const habits = require('./routers/habits');
 const login = require('./routers/login');
+const users = require('./routers/users');
 require('./sendDailyEmail');
 require('./updateHabitsRecordsNightly');
 
@@ -47,6 +48,7 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+app.use('/api/users', users);
 app.use('/api/about-others/people', people);
 app.use('/api/ohlife/entries', entries);
 app.use('/api/good-habits/habits', habits);

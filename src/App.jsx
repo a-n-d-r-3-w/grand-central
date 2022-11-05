@@ -4,11 +4,15 @@ import Login from './Login';
 import AboutOthers from './AboutOthers';
 import OhLife from './OhLife';
 import GoodHabits from './GoodHabits';
+import CreateAccount from './CreateAccount';
 
 const App = () => {
   return (
     <Router>
       <Switch>
+        <Route path="/create-account">
+          <CreateAccount />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
