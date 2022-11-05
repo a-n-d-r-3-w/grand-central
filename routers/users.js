@@ -7,18 +7,25 @@ const router = express.Router();
 router.use(bodyParser.urlencoded());
 
 router.post('/', async (req, res) => {
+  const { username, password } = req.body;
   try {
-    await createUser(req.body.username, req.body.password);
+    await createUser(username, password);
     res.redirect(
       HttpStatus.SEE_OTHER,
-      `/create-account/success?username=${req.body.username}`
+      `/create-account/success?username=${username}`
     );
     return;
   } catch (error) {
-    if (error.message === 'Username already exists.') {
-      res.redirect(HttpStatus.SEE_OTHER, '/create-account/username-exists');
+    if (error.message === 'Username has been taken.') {
+      res.redirect(
+        HttpStatus.SEE_OTHER,
+        `/create-account/username-has-been-taken?username=${username}`
+      );
     } else {
-      res.redirect(HttpStatus.SEE_OTHER, '/create-account/error');
+      res.redirect(
+        HttpStatus.SEE_OTHER,
+        `/create-account/error?username=${username}`
+      );
     }
   }
 });
