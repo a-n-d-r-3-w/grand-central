@@ -8,6 +8,16 @@ router.use(bodyParser.urlencoded());
 
 router.post('/', async (req, res) => {
   const { username, password } = req.body;
+  // TODO: Validate username
+  if (username.length < 4 || username.length > 20) {
+    res.redirect(
+      HttpStatus.SEE_OTHER,
+      `/create-account?error=invalid-username`
+    );
+  }
+
+  // TODO: Validate password
+
   try {
     await createUser(username, password);
     res.redirect(
