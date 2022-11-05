@@ -8,7 +8,7 @@ router.use(bodyParser.urlencoded());
 
 router.post('/', async (req, res) => {
   await createUser(req.body.username, req.body.password);
-  res.sendStatus(HttpStatus.CREATED);
+  res.redirect(HttpStatus.CREATED, '/create-account');
 });
 
 module.exports = router;
