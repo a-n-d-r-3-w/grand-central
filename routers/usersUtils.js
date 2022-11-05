@@ -9,7 +9,7 @@ const createUser = async (username, password) => {
   const users = await connectQueryEnd(sql1, args1);
   const existingUser = users.find(user => user.username === username);
   if (existingUser) {
-    console.log('Found existing user:', existingUser);
+    throw new Error('Username already exists.');
   }
 
   const salt = await bcrypt.genSalt(saltRounds);
