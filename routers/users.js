@@ -8,8 +8,31 @@ router.use(bodyParser.urlencoded());
 
 router.post('/', async (req, res) => {
   const { username, password } = req.body;
-  // TODO: Validate username
+
+  // Validate username.
   if (username.length < 4 || username.length > 20) {
+    res.redirect(
+      HttpStatus.SEE_OTHER,
+      `/create-account?error=invalid-username`
+    );
+  }
+
+  const usernameContainsValidCharacters = username
+    .split('')
+    .map(character => character.charCodeAt())
+    .every(charCode => {
+      if (charCode >= 48 && charCode <= 57) {
+        // It's a digit.
+        return true;
+      }
+      if (charCode >= 97 && charCode <= 122) {
+        // It's a lowercase letter.
+        return true;
+      }
+      return false;
+    });
+
+  if (!usernameContainsValidCharacters) {
     res.redirect(
       HttpStatus.SEE_OTHER,
       `/create-account?error=invalid-username`
