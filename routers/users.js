@@ -16,10 +16,10 @@ router.post('/', async (req, res) => {
     );
     return;
   } catch (error) {
-    if (error.message === 'Username has been taken.') {
+    if (error.message.startsWith('Username not available: ')) {
       res.redirect(
         HttpStatus.SEE_OTHER,
-        `/create-account/username-has-been-taken?username=${username}`
+        `/create-account?error=username-not-available`
       );
     } else {
       res.redirect(

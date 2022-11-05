@@ -6,7 +6,6 @@ import OhLife from './OhLife';
 import GoodHabits from './GoodHabits';
 import CreateAccount from './CreateAccount';
 import CreateAccountSuccess from './CreateAccountSuccess';
-import CreateAccountUsernameExists from './CreateAccountUsernameExists';
 
 const App = () => {
   return (
@@ -14,9 +13,6 @@ const App = () => {
       <Switch>
         <Route path="/create-account/success">
           <CreateAccountSuccess />
-        </Route>
-        <Route path="/create-account/username-has-been-taken">
-          <CreateAccountUsernameExists />
         </Route>
         <Route path="/create-account">
           <CreateAccount />
