@@ -22,6 +22,7 @@ module.exports = (sql, args) => {
       .query(sql, args)
       .catch(error => {
         console.error(error);
+        throw new Error('Database error.');
       })
       .finally(() => {
         connection.end();
