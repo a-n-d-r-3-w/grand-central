@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
   try {
     const { username, password } = req.body;
     validateUsername(username);
-    validatePassword(password);
+    validatePassword();
 
     await createUser(username, password);
     res.redirect(

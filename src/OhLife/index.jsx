@@ -169,7 +169,7 @@ const OhLife = () => {
         )}
       </div>
       <div className="form-group">
-        <label for="entry">Entry:</label>
+        <label htmlFor="entry">Entry:</label>
         <textarea
           id="entry"
           className="form-control"
