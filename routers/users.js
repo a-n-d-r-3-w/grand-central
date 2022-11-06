@@ -24,11 +24,17 @@ const validateUsername = username => {
   }
 };
 
+const validatePassword = password => {
+  if (password.length < 8 || password.length > 64) {
+    throw new Error('That password is too short or too long.');
+  }
+};
+
 router.post('/', async (req, res) => {
   try {
     const { username, password } = req.body;
     validateUsername(username);
-    // TODO: Validate password
+    validatePassword(password);
 
     await createUser(username, password);
     res.redirect(
