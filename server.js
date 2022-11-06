@@ -9,6 +9,7 @@ const entries = require('./routers/entries');
 const habits = require('./routers/habits');
 const login = require('./routers/login');
 const users = require('./routers/users');
+const sessions = require('./routers/sessions');
 require('./sendDailyEmail');
 require('./updateHabitsRecordsNightly');
 
