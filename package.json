@@ -42,7 +42,7 @@
     "// Runs client and server in prod mode": "",
     "start": "concurrently \"npm:client:build\" \"npm:server:start\" \"npm:build:blog\"",
     "// Client-specific scripts": "",
-    "client:dev": "react-scripts start",
+    "client:dev": "HTTPS=true react-scripts start",
     "client:test": "react-scripts test",
     "client:build": "react-scripts build",
     "client:eject": "react-scripts eject",
