@@ -5,7 +5,7 @@ const removeToken = () => {
   axios.delete('/api/login');
 };
 
-const Login = () => {
+const LegacyLogin = () => {
   useEffect(() => {
     removeToken();
   }, []);
@@ -82,4 +82,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LegacyLogin;

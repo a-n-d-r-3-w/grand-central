@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Login from './Login';
+import LegacyLogin from './LegacyLogin';
 import AboutOthers from './AboutOthers';
 import OhLife from './OhLife';
 import GoodHabits from './GoodHabits';
@@ -18,7 +18,7 @@ const App = () => {
           <CreateAccount />
         </Route>
         <Route path="/login">
-          <Login />
+          <LegacyLogin />
         </Route>
         <Route path="/about-others">
           <AboutOthers />
