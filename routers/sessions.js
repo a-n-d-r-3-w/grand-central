@@ -29,14 +29,14 @@ router.post('/', async (req, res) => {
     // Create session key.
     const sessionId = crypto.randomBytes(32).toString('hex');
     // Store session in database.
-    const sql = `INSERT INTO inclusive_web_apps.sessions (sessionId, username) VALUES (?, ?);`;
+    const sql = `INSERT INTO inclusive_web_apps.sessions (session_id, username) VALUES (?, ?);`;
     const args = [sessionId, username];
     await connectQueryEnd(sql, args);
     // Set response cookie.
     res.cookie('sessionId', sessionId, {
       httpOnly: true,
       sameSite: 'strict',
-      secure: process.env.NODE_ENV === 'production'
+      secure: true
     });
 
     // Redirect user to their home page.
