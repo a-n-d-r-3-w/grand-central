@@ -6,17 +6,24 @@ import OhLife from './OhLife';
 import GoodHabits from './GoodHabits';
 import CreateAccount from './CreateAccount';
 import CreateAccountSuccess from './CreateAccountSuccess';
+import LogIn from './LogIn';
 
 const App = () => {
   return (
     <Router>
       <Switch>
+        {/* New pages */}
         <Route path="/create-account/success">
           <CreateAccountSuccess />
         </Route>
         <Route path="/create-account">
           <CreateAccount />
         </Route>
+        <Route path="/log-in">
+          <LogIn />
+        </Route>
+
+        {/* Legacy pages */}
         <Route path="/login">
           <LegacyLogin />
         </Route>
