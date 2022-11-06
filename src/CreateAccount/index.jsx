@@ -7,7 +7,9 @@ const CreateAccount = () => {
   return (
     <div style={{ padding: '1rem' }}>
       <h1>Create account</h1>
-      {createAccountError && <p>{createAccountError}</p>}
+      {createAccountError && (
+        <p style={{ color: '#e31c3d' }}>{createAccountError}</p>
+      )}
 
       <form method="POST" action="/api/users">
         <p>
