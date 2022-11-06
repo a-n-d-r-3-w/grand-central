@@ -6,42 +6,30 @@ const { createUser } = require('./usersUtils');
 const router = express.Router();
 router.use(bodyParser.urlencoded());
 
-router.post('/', async (req, res) => {
-  const { username, password } = req.body;
-
-  // Validate username.
+const validateUsername = username => {
   if (username.length < 4 || username.length > 20) {
-    res.redirect(
-      HttpStatus.SEE_OTHER,
-      `/create-account?error=invalid-username`
-    );
+    throw new Error('That username is too short or too long.');
   }
 
-  const usernameContainsValidCharacters = username
-    .split('')
+  const characters = username.split('');
+  const everyCharacterIsValid = characters
     .map(character => character.charCodeAt())
     .every(charCode => {
-      if (charCode >= 48 && charCode <= 57) {
-        // It's a digit.
-        return true;
-      }
-      if (charCode >= 97 && charCode <= 122) {
-        // It's a lowercase letter.
-        return true;
-      }
-      return false;
+      const isLowercaseLetter = charCode >= 97 && charCode <= 122;
+      const isDigit = charCode >= 48 && charCode <= 57;
+      return isLowercaseLetter || isDigit;
     });
-
-  if (!usernameContainsValidCharacters) {
-    res.redirect(
-      HttpStatus.SEE_OTHER,
-      `/create-account?error=invalid-username`
-    );
+  if (!everyCharacterIsValid) {
+    throw new Error('That username contains invalid characters.');
   }
+};
 
-  // TODO: Validate password
-
+router.post('/', async (req, res) => {
   try {
+    const { username, password } = req.body;
+    validateUsername(username);
+    // TODO: Validate password
+
     await createUser(username, password);
     res.redirect(
       HttpStatus.SEE_OTHER,
@@ -49,17 +37,11 @@ router.post('/', async (req, res) => {
     );
     return;
   } catch (error) {
-    if (error.message.startsWith('Username not available: ')) {
-      res.redirect(
-        HttpStatus.SEE_OTHER,
-        `/create-account?error=username-not-available`
-      );
-    } else {
-      res.redirect(
-        HttpStatus.SEE_OTHER,
-        `/create-account/error?username=${username}`
-      );
-    }
+    const encodedErrorMessage = encodeURIComponent(error.message); // To replace spaces with %20, for example.
+    res.redirect(
+      HttpStatus.SEE_OTHER,
+      `/create-account?error=${encodedErrorMessage}`
+    );
   }
 });
 

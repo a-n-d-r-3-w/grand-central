@@ -2,18 +2,12 @@ import React from 'react';
 
 const CreateAccount = () => {
   const urlSearchParams = new URLSearchParams(window.location.search);
-  const isUsernameNotAvailableError =
-    urlSearchParams.get('error') === 'username-not-available';
+  const createAccountError = urlSearchParams.get('error');
 
   return (
     <div style={{ padding: '1rem' }}>
       <h1>Create account</h1>
-      {isUsernameNotAvailableError && (
-        <p>
-          Sorry, that username is not available. Please try a different
-          username.
-        </p>
-      )}
+      {createAccountError && <p>{createAccountError}</p>}
 
       <form method="POST" action="/api/users">
         <p>
