@@ -12,7 +12,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        {/* New pages */}
+        {/* Pages for new apps. */}
         <Route path="/create-account/success">
           <CreateAccountSuccess />
         </Route>
@@ -23,7 +23,7 @@ const App = () => {
           <LogIn />
         </Route>
 
-        {/* Legacy pages */}
+        {/* Pages for legacy apps. */}
         <Route path="/login">
           <LegacyLogin />
         </Route>

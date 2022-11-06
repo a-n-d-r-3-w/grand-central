@@ -48,7 +48,11 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+// APIs for new apps.
 app.use('/api/users', users);
+app.use('/api/sessions', sessions);
+
+// APIs for legacy apps.
 app.use('/api/about-others/people', people);
 app.use('/api/ohlife/entries', entries);
 app.use('/api/good-habits/habits', habits);
