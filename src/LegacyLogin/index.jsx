@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 
 const removeToken = () => {
-  axios.delete('/api/login');
+  axios.delete('/api/legacy/login');
 };
 
 const LegacyLogin = () => {
@@ -22,7 +22,7 @@ const LegacyLogin = () => {
       <div className="row">
         <div className="col-sm"></div>
         <div className="col-sm">
-          <form action="/api/login" method="post">
+          <form action="/api/legacy/login" method="post">
             <div className="mb-3">
               <div className="form-check">
                 <input
@@ -30,7 +30,7 @@ const LegacyLogin = () => {
                   type="radio"
                   name="selected-app"
                   id="good-habits-radio"
-                  value="good-habits"
+                  value="legacy/good-habits"
                   defaultChecked
                 />
                 <label className="form-check-label" htmlFor="good-habits-radio">
@@ -43,7 +43,7 @@ const LegacyLogin = () => {
                   type="radio"
                   name="selected-app"
                   id="about-others-radio"
-                  value="about-others"
+                  value="legacy/about-others"
                 />
                 <label
                   className="form-check-label"
@@ -58,7 +58,7 @@ const LegacyLogin = () => {
                   type="radio"
                   name="selected-app"
                   id="ohlife-radio"
-                  value="ohlife"
+                  value="legacy/ohlife"
                 />
                 <label className="form-check-label" htmlFor="ohlife-radio">
                   OhLife

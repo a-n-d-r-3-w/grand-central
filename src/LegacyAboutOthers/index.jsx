@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const AboutOthers = () => {
+const LegacyAboutOthers = () => {
   const [people, setPeople] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [saveTimeoutId, setSaveTimeoutId] = useState(null);
   const [isSaved, setIsSaved] = useState(true);
 
   const getPeople = async () => {
-    const response = await axios.get('/api/about-others/people');
+    const response = await axios.get('/api/legacy/about-others/people');
     const people = response.data;
     setPeople(people);
   };
@@ -23,13 +23,13 @@ const AboutOthers = () => {
       const peopleToImport = JSON.parse(importData);
       await Promise.all(
         peopleToImport.map(async person => {
-          await axios.post('/api/about-others/people', {
+          await axios.post('/api/legacy/about-others/people', {
             name: person.name,
             notes: person.notes
           });
         })
       );
-      const response = await axios.get('/api/about-others/people');
+      const response = await axios.get('/api/legacy/about-others/people');
       const people = response.data;
       setPeople(people);
     }
@@ -38,8 +38,8 @@ const AboutOthers = () => {
   const onClickAddPerson = async () => {
     const name = window.prompt('Name:');
     if (name && name.trim().length > 0) {
-      await axios.post('/api/about-others/people', { name });
-      const response = await axios.get('/api/about-others/people');
+      await axios.post('/api/legacy/about-others/people', { name });
+      const response = await axios.get('/api/legacy/about-others/people');
       const people = response.data;
       setPeople(people);
     }
@@ -48,10 +48,13 @@ const AboutOthers = () => {
   const onClickRenamePerson = async person => {
     const newName = window.prompt('New name:');
     if (newName && newName.trim().length > 0) {
-      await axios.put(`/api/about-others/people/${person.personId}/name`, {
-        newName
-      });
-      const response = await axios.get('/api/about-others/people');
+      await axios.put(
+        `/api/legacy/about-others/people/${person.personId}/name`,
+        {
+          newName
+        }
+      );
+      const response = await axios.get('/api/legacy/about-others/people');
       const people = response.data;
       setPeople(people);
     }
@@ -59,7 +62,7 @@ const AboutOthers = () => {
 
   const onClickDeletePerson = async person => {
     if (window.confirm(`Delete ${person.name}?`)) {
-      await axios.delete(`/api/about-others/people/${person.personId}`);
+      await axios.delete(`/api/legacy/about-others/people/${person.personId}`);
       await getPeople();
     }
   };
@@ -69,7 +72,7 @@ const AboutOthers = () => {
       "Are you sure you want to DELETE ALL? If so, enter 'YES'."
     );
     if (response === 'YES') {
-      await axios.delete('/api/about-others/people');
+      await axios.delete('/api/legacy/about-others/people');
       await getPeople();
     }
   };
@@ -91,7 +94,7 @@ const AboutOthers = () => {
     setSaveTimeoutId(
       window.setTimeout(async () => {
         await axios.put(
-          `/api/about-others/people/${selectedPerson.personId}/notes`,
+          `/api/legacy/about-others/people/${selectedPerson.personId}/notes`,
           {
             newNotes
           }
@@ -195,4 +198,4 @@ const AboutOthers = () => {
   return selectedPerson ? aboutPerson : aboutOthers;
 };
 
-export default AboutOthers;
+export default LegacyAboutOthers;

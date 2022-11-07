@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const GoodHabits = () => {
+const LegacyGoodHabits = () => {
   const [habits, setHabits] = useState([]);
 
   const getHabits = async () => {
-    const response = await axios.get('/api/good-habits/habits');
+    const response = await axios.get('/api/legacy/good-habits/habits');
     const habits = response.data;
     setHabits(habits);
   };
@@ -17,8 +17,8 @@ const GoodHabits = () => {
   const onClickAddHabit = async () => {
     const description = window.prompt('Description: ');
     if (description && description.trim().length > 0) {
-      await axios.post('/api/good-habits/habits', { description });
-      const response = await axios.get('/api/good-habits/habits');
+      await axios.post('/api/legacy/good-habits/habits', { description });
+      const response = await axios.get('/api/legacy/good-habits/habits');
       const habits = response.data;
       setHabits(habits);
     }
@@ -26,7 +26,7 @@ const GoodHabits = () => {
 
   const onClickDeleteHabit = async habit => {
     if (window.confirm(`Delete ${habit.description}?`)) {
-      await axios.delete(`/api/good-habits/habits/${habit.habitId}`);
+      await axios.delete(`/api/legacy/good-habits/habits/${habit.habitId}`);
       await getHabits();
     }
   };
@@ -34,10 +34,10 @@ const GoodHabits = () => {
   const onClickDoneToday = async habit => {
     const oldRecord = habit.record;
     const newRecord = oldRecord.slice(0, oldRecord.length - 1) + 'y';
-    await axios.put(`/api/good-habits/habits/${habit.habitId}/record`, {
+    await axios.put(`/api/legacy/good-habits/habits/${habit.habitId}/record`, {
       newRecord
     });
-    const response = await axios.get('/api/good-habits/habits');
+    const response = await axios.get('/api/legacy/good-habits/habits');
     const habits = response.data;
     setHabits(habits);
   };
@@ -45,10 +45,10 @@ const GoodHabits = () => {
   const onClickNotDoneToday = async habit => {
     const oldRecord = habit.record;
     const newRecord = oldRecord.slice(0, oldRecord.length - 1) + '?';
-    await axios.put(`/api/good-habits/habits/${habit.habitId}/record`, {
+    await axios.put(`/api/legacy/good-habits/habits/${habit.habitId}/record`, {
       newRecord
     });
-    const response = await axios.get('/api/good-habits/habits');
+    const response = await axios.get('/api/legacy/good-habits/habits');
     const habits = response.data;
     setHabits(habits);
   };
@@ -56,10 +56,13 @@ const GoodHabits = () => {
   const onClickEdit = async habit => {
     const newDescription = window.prompt('New description:');
     if (newDescription && newDescription.trim().length > 0) {
-      await axios.put(`/api/good-habits/habits/${habit.habitId}/description`, {
-        newDescription
-      });
-      const response = await axios.get('/api/good-habits/habits');
+      await axios.put(
+        `/api/legacy/good-habits/habits/${habit.habitId}/description`,
+        {
+          newDescription
+        }
+      );
+      const response = await axios.get('/api/legacy/good-habits/habits');
       const habits = response.data;
       setHabits(habits);
     }
@@ -124,4 +127,4 @@ const GoodHabits = () => {
   );
 };
 
-export default GoodHabits;
+export default LegacyGoodHabits;

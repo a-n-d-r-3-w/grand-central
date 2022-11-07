@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import LegacyLogin from './LegacyLogin';
-import AboutOthers from './AboutOthers';
-import OhLife from './OhLife';
-import GoodHabits from './GoodHabits';
+import LegacyAboutOthers from './LegacyAboutOthers';
+import LegacyOhLife from './LegacyOhLife';
+import LegacyGoodHabits from './LegacyGoodHabits';
+
 import CreateAccount from './CreateAccount';
 import CreateAccountSuccess from './CreateAccountSuccess';
 import LogIn from './LogIn';
@@ -24,17 +26,17 @@ const App = () => {
         </Route>
 
         {/* Pages for legacy apps. */}
-        <Route path="/login">
+        <Route path="/legacy/login">
           <LegacyLogin />
         </Route>
-        <Route path="/about-others">
-          <AboutOthers />
+        <Route path="/legacy/about-others">
+          <LegacyAboutOthers />
         </Route>
-        <Route path="/ohlife">
-          <OhLife />
+        <Route path="/legacy/ohlife">
+          <LegacyOhLife />
         </Route>
-        <Route path="/good-habits">
-          <GoodHabits />
+        <Route path="/legacy/good-habits">
+          <LegacyGoodHabits />
         </Route>
         <Route path="/">
           <GrandCentral />

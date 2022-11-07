@@ -18,7 +18,13 @@ router.delete('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const selectedApp = req.body['selected-app'];
-  if (!validator.isIn(selectedApp, ['about-others', 'ohlife', 'good-habits'])) {
+  if (
+    !validator.isIn(selectedApp, [
+      'legacy/about-others',
+      'legacy/ohlife',
+      'legacy/good-habits'
+    ])
+  ) {
     res.sendStatus(HttpStatus.BAD_REQUEST);
   }
 

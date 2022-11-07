@@ -54,10 +54,10 @@ app.use('/api/users', users);
 app.use('/api/sessions', sessions);
 
 // APIs for legacy apps.
-app.use('/api/about-others/people', people);
-app.use('/api/ohlife/entries', entries);
-app.use('/api/good-habits/habits', habits);
-app.use('/api/login', login);
+app.use('/api/legacy/about-others/people', people);
+app.use('/api/legacy/ohlife/entries', entries);
+app.use('/api/legacy/good-habits/habits', habits);
+app.use('/api/legacy/login', login);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

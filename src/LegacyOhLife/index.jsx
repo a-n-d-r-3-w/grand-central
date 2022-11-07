@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const OhLife = () => {
+const LegacyOhLife = () => {
   const [entries, setEntries] = useState([]);
   const [selectedEntry, setSelectedEntry] = useState(null);
   const [saveTimeoutId, setSaveTimeoutId] = useState(null);
   const [isSaved, setIsSaved] = useState(true);
 
   const getEntries = async () => {
-    const response = await axios.get('/api/ohlife/entries');
+    const response = await axios.get('/api/legacy/ohlife/entries');
     const entries = response.data;
     setEntries(entries);
   };
@@ -23,13 +23,13 @@ const OhLife = () => {
       const entriesToImport = JSON.parse(importData);
       await Promise.all(
         entriesToImport.map(async entry => {
-          await axios.post('/api/ohlife/entries', {
+          await axios.post('/api/legacy/ohlife/entries', {
             name: entry.name,
             notes: entry.notes
           });
         })
       );
-      const response = await axios.get('/api/ohlife/entries');
+      const response = await axios.get('/api/legacy/ohlife/entries');
       const entries = response.data;
       setEntries(entries);
     }
@@ -37,8 +37,8 @@ const OhLife = () => {
 
   const onClickAddEntry = async () => {
     const name = Date.now().toString();
-    await axios.post('/api/ohlife/entries', { name });
-    const response = await axios.get('/api/ohlife/entries');
+    await axios.post('/api/legacy/ohlife/entries', { name });
+    const response = await axios.get('/api/legacy/ohlife/entries');
     const entries = response.data;
     setEntries(entries);
   };
@@ -49,7 +49,7 @@ const OhLife = () => {
         `Delete ${new Date(Number.parseInt(entry.name)).toDateString()}?`
       )
     ) {
-      await axios.delete(`/api/ohlife/entries/${entry.entryId}`);
+      await axios.delete(`/api/legacy/ohlife/entries/${entry.entryId}`);
       await getEntries();
     }
   };
@@ -59,7 +59,7 @@ const OhLife = () => {
       "Are you sure you want to DELETE ALL? If so, enter 'YES'."
     );
     if (response === 'YES') {
-      await axios.delete('/api/ohlife/entries');
+      await axios.delete('/api/legacy/ohlife/entries');
       await getEntries();
     }
   };
@@ -80,7 +80,7 @@ const OhLife = () => {
     setSelectedEntry(updatedEntry);
     setSaveTimeoutId(
       window.setTimeout(async () => {
-        await axios.put(`/api/ohlife/entries/${selectedEntry.entryId}`, {
+        await axios.put(`/api/legacy/ohlife/entries/${selectedEntry.entryId}`, {
           newNotes
         });
         setIsSaved(true);
@@ -184,4 +184,4 @@ const OhLife = () => {
   return selectedEntry ? aboutEntry : ohLife;
 };
 
-export default OhLife;
+export default LegacyOhLife;
