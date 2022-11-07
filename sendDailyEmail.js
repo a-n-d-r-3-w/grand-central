@@ -23,7 +23,7 @@ const sendEmail = async () => {
     const randomEntry = entries[randomIndex];
     const date = new Date(Number.parseInt(randomEntry.name)).toDateString();
     const text =
-      'Hello from https://grandcentral.nfshost.com/login! Do you remember this?\n\n---\n\n' +
+      'Hello from https://grandcentral.nfshost.com/legacy/login! Do you remember this?\n\n---\n\n' +
       randomEntry.notes;
     await transporter.sendMail({
       from: process.env.OHLIFE_MAIL_FROM,
